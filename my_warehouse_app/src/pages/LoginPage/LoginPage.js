@@ -4,7 +4,7 @@ function LoginPage() {
     return (
         <div className="centered">
             <div>
-                <h2>Login Page</h2>
+                <h2>Log In</h2>
             </div>
             <div>
                 <CustomForm />

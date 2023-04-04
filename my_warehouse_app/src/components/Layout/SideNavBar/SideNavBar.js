@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { FaTable, FaWpforms } from 'react-icons/fa';
+import { FaProductHunt, FaWarehouse } from 'react-icons/fa';
 import classes from './SideNavBar.module.css'
 
 const SideNavbar = () => {
@@ -10,7 +10,7 @@ const SideNavbar = () => {
                     <li>
                         <NavLink activeClassName={classes.active} to='/products'>
                             <div>
-                                <FaWpforms />
+                                <FaProductHunt size={35}/>
                                 <p>Products</p>
                             </div>
                         </NavLink>
@@ -18,7 +18,7 @@ const SideNavbar = () => {
                     <li>
                         <NavLink activeClassName={classes.active} to='/warehouses'>
                             <div>
-                                <FaTable />
+                                <FaWarehouse size={35}/>
                                 <p>Warehouses</p>
                             </div>
                         </NavLink>

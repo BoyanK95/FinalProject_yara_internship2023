@@ -3,8 +3,11 @@ import Button from 'react-bootstrap/Button';
 import useInput from '../../hooks/use-input';
 import classes from './Form.module.css';
 import isNotEmpty from '../../hooks/isNotEmpty';
+import {useHistory} from 'react-router-dom'
 
 const CustomForm = (props) => {
+    const history = useHistory()
+
     const {
         value: firstInput,
         isValid: firstInputIsValid,
@@ -33,18 +36,18 @@ const CustomForm = (props) => {
     } = useInput(isNotEmpty);
 
     const {
-        value: numberInput,
-        isValid: numberInputIsValid,
-        hasError: numberInputHasError,
-        valueChangeHandler: numberInputHandler,
-        inputBlurHandler: numberBlurHandler,
-        reset: resetNumberInput
+        value: fourthInput,
+        isValid: fourthInputIsValid,
+        hasError: fourthInputHasError,
+        valueChangeHandler: fourthInputHandler,
+        inputBlurHandler: fourthInputBlurHandler,
+        reset: resetFourthInput
     } = useInput(isNotEmpty);
 
     let formIsValid = false;
     // console.log(formIsValid);
 
-    if (firstInputIsValid && secondInputIsValid && thirdInputIsValid && numberInputIsValid) {
+    if (firstInputIsValid && secondInputIsValid && thirdInputIsValid && fourthInputIsValid) {
         formIsValid = true;
     }
 
@@ -58,7 +61,7 @@ const CustomForm = (props) => {
         console.log(firstInput);
         console.log(secondInput);
         console.log(thirdInput);
-        console.log(numberInput);
+        console.log(fourthInput);
 
         // const id = Math.floor(Math.random() * 100000);
         // props.onSubmit({
@@ -66,7 +69,7 @@ const CustomForm = (props) => {
         //     firstTd: firstInput,
         //     secondTd: secondInput,
         //     thirdTd: thirdInput,
-        //     numberTd: numberInput
+        //     numberTd: fourthInput
         // });
 
         resetHandler();
@@ -76,13 +79,15 @@ const CustomForm = (props) => {
         resetFirstInput();
         resetSecondInput();
         resetThirdInput();
-        resetNumberInput();
+        resetFourthInput();
+        
+        history.push('/')
     }
 
     const regionInputClass = !firstInputHasError ? classes.input : classes.error;
     const calendarInputClass = !secondInputHasError ? classes.input : classes.error;
     const varietyInputClass = !thirdInputHasError ? classes.input : classes.error;
-    const numberInputClass = !numberInputHasError ? classes.input : classes.error;
+    const numberInputClass = !fourthInputHasError ? classes.input : classes.error;
 
     return (
         <>
@@ -122,8 +127,8 @@ const CustomForm = (props) => {
                     <label htmlFor='variety'>{props.thirdLabel}</label>
                     <input
                         className={varietyInputClass}
-                        type='text'
-                        name='variety'
+                        type='password'
+                        name='password'
                         onBlur={thirdInputBlurHandler}
                         onChange={thirdInputHandler}
                         value={thirdInput}
@@ -133,17 +138,17 @@ const CustomForm = (props) => {
                     )}
                 </div>
                 <div className={classes.container}>
-                    <label htmlFor={props.numberLabel}>{props.numberLabel}</label>
+                    <label htmlFor={props.numberLabel}>{props.fourthLabel}</label>
                     <input
                         className={numberInputClass}
-                        type='number'
-                        name='numberInput'
-                        onBlur={numberBlurHandler}
-                        onChange={numberInputHandler}
-                        value={numberInput}
+                        type='password'
+                        name='fourthInput'
+                        onBlur={fourthInputBlurHandler}
+                        onChange={fourthInputHandler}
+                        value={fourthInput}
                     />
-                    {numberInputHasError && (
-                        <p className={classes.errorText}>Value of {props.numberLabel} is required!</p>
+                    {fourthInputHasError && (
+                        <p className={classes.errorText}>Value of {props.fourthLabel} is required!</p>
                     )}
                 </div>
                 <div className={classes.btnContainer}>
