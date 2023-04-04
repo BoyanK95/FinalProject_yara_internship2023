@@ -1,6 +1,6 @@
 function ProductsPage() {
     return (
-        <div>
+        <div className="centered">
             <h1>Products Page</h1>
         </div>
     );

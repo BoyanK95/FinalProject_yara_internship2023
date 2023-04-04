@@ -2,8 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import useInput from '../../hooks/use-input';
 import classes from './Form.module.css';
-import isNotEmpty from '../../hooks/isNotEmpty'
-
+import isNotEmpty from '../../hooks/isNotEmpty';
 
 const CustomForm = (props) => {
     const {
@@ -61,7 +60,6 @@ const CustomForm = (props) => {
         console.log(thirdInput);
         console.log(numberInput);
 
-       
         // const id = Math.floor(Math.random() * 100000);
         // props.onSubmit({
         //     id: id,
@@ -70,7 +68,6 @@ const CustomForm = (props) => {
         //     thirdTd: thirdInput,
         //     numberTd: numberInput
         // });
-        
 
         resetHandler();
     }
@@ -117,7 +114,9 @@ const CustomForm = (props) => {
                         onChange={secondInputNameHandler}
                         value={secondInput}
                     />
-                    {secondInputHasError && <p className={classes.errorText}>Value of {props.secondLabel} is required!</p>}
+                    {secondInputHasError && (
+                        <p className={classes.errorText}>Value of {props.secondLabel} is required!</p>
+                    )}
                 </div>
                 <div className={classes.container}>
                     <label htmlFor='variety'>{props.thirdLabel}</label>
@@ -129,7 +128,9 @@ const CustomForm = (props) => {
                         onChange={thirdInputHandler}
                         value={thirdInput}
                     />
-                    {thirdInputHasError && <p className={classes.errorText}>Value of {props.thirdLabel} is required!</p>}
+                    {thirdInputHasError && (
+                        <p className={classes.errorText}>Value of {props.thirdLabel} is required!</p>
+                    )}
                 </div>
                 <div className={classes.container}>
                     <label htmlFor={props.numberLabel}>{props.numberLabel}</label>
@@ -146,10 +147,11 @@ const CustomForm = (props) => {
                     )}
                 </div>
                 <div className={classes.btnContainer}>
-                    <Button variant='danger' type='button' onClick={resetHandler}>
+                    <Button className={classes.button} variant='danger' type='button' onClick={resetHandler}>
                         Cancel
                     </Button>
-                    <Button variant='primary' type='submit' disabled={!formIsValid}>
+
+                    <Button className={classes.button} variant='primary' type='submit' disabled={!formIsValid}>
                         Save
                     </Button>
                 </div>

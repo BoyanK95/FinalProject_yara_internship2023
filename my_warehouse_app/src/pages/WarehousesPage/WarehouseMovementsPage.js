@@ -1,6 +1,6 @@
 function WarehouseMovementsPage() {
     return (
-        <div>
+        <div className="centered">
             <h1>Waregouses Page</h1>
         </div>
     );

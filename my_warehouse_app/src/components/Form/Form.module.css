@@ -27,8 +27,9 @@ input {
 }
 
 .btnContainer button {
-    /* margin: 1rem; */
+    margin: 1rem;
     padding: 0.5rem 1.5rem;
+    
 }
 
 .input {
@@ -45,7 +46,7 @@ input {
     font-size: 15px;
 }
 
-button {
+.button {
     margin: 1rem;
 }
 

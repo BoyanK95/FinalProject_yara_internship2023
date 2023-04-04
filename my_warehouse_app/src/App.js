@@ -6,6 +6,7 @@ import ProductsPage from './pages/ProductsPage/ProductsPage';
 import WarehouseMovementsPage from './pages/WarehousesPage/WarehouseMovementsPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NotFound from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
     return (
@@ -25,6 +26,9 @@ function App() {
                 </Route>
                 <Route path='/login'>
                     <LoginPage />
+                </Route>
+                <Route path='*'>
+                    <NotFound />
                 </Route>
             </Switch>
         </>
