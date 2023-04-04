@@ -1,4 +1,10 @@
 h2 {
     padding: 2rem;
-    
+}
+
+span {
+    color: rgb(8, 8, 101);
+    font-weight: '900';
+    cursor: pointer;
+    text-decoration: underline;
 }

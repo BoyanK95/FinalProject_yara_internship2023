@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to right, rgb(222, 229, 233), rgb(152, 166, 225));
+}
+
 .centered {
   text-align: center;
 }
