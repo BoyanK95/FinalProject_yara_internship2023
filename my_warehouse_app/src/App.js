@@ -7,10 +7,11 @@ import WarehouseMovementsPage from './pages/WarehousesPage/WarehouseMovementsPag
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NotFound from './pages/NotFoundPage/NotFoundPage';
+import Layout from './components/Layout/Layout';
 
 function App() {
     return (
-        <>
+        <Layout>
             <Switch>
                 <Route path='/' exact>
                     <HomePage />
@@ -31,7 +32,7 @@ function App() {
                     <NotFound />
                 </Route>
             </Switch>
-        </>
+        </Layout>
     );
 }
 

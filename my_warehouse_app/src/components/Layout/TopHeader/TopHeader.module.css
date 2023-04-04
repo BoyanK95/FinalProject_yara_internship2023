@@ -1,0 +1,12 @@
+.background{
+    background-image: linear-gradient(to right, rgb(100, 161, 202), rgb(54, 78, 175));
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    font-weight: 700;
+    padding: 1rem;
+    color: rgb(1, 1, 41);
+}

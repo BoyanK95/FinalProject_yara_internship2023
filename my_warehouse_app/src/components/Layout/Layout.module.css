@@ -1,0 +1,9 @@
+.main {
+    text-align: center;
+    top: 3rem;
+    left: 6rem;
+    position: absolute;
+    margin: 3rem auto;
+    width: 90%;
+    /* height: 5rem; */
+} 
