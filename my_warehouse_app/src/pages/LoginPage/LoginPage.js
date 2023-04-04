@@ -1,7 +1,14 @@
+import CustomForm from '../../components/Form/CustomForm';
+
 function LoginPage() {
     return (
         <div>
-            <h1>Login Page</h1>
+            <div>
+                <h2>Login Page</h2>
+            </div>
+            <div>
+                <CustomForm />
+            </div>
         </div>
     );
 }

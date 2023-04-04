@@ -2,8 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import useInput from '../../hooks/use-input';
 import classes from './Form.module.css';
-
-const isNotEmpty = (value) => value.trim() !== '';
+import isNotEmpty from '../../hooks/isNotEmpty'
 
 
 const CustomForm = (props) => {
