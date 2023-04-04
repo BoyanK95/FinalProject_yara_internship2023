@@ -1,0 +1,15 @@
+.logoImg {
+    padding: 0;
+    margin: 0;
+    height: 4.9rem;
+    width: 4.9rem;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+.logoImg:hover{
+    background-color: rgba(123, 150, 190, 0.585);
+    /* /border: 2px solid rgba(20, 35, 90, 0.568); */
+    box-shadow: inset -3px -3px 7px #0212318a; 
+}
