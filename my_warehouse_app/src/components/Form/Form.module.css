@@ -45,12 +45,16 @@ input {
     font-size: 15px;
 }
 
+button {
+    margin: 1rem;
+}
+
 :disabled {
     background-color: darkgray;
     border: 1px solid rgb(108, 105, 105);
 }
 
-:disabled:hover {
+.disabled:hover {
     background-color: rgb(138, 137, 137);
     border: 1px solid rgb(108, 105, 105);
     cursor: not-allowed;

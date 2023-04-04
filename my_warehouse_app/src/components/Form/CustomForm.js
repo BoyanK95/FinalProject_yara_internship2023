@@ -1,11 +1,10 @@
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import useInput from '../../hooks/use-input';
 import classes from './Form.module.css';
 
 const isNotEmpty = (value) => value.trim() !== '';
 
-const dataArr = [];
 
 const CustomForm = (props) => {
     const {
@@ -58,14 +57,11 @@ const CustomForm = (props) => {
             return;
         }
         console.log('SIBMITED');
-        // console.log(firstInput);
-        // console.log(secondInput);
-        // console.log(thirdInput);
+        console.log(firstInput);
+        console.log(secondInput);
+        console.log(thirdInput);
+        console.log(numberInput);
 
-        // dataArr.push(firstInput);
-        // dataArr.push(secondInput);
-        // dataArr.push(thirdInput);
-        // dataArr.push(numberInput);
        
         // const id = Math.floor(Math.random() * 100000);
         // props.onSubmit({
@@ -123,9 +119,6 @@ const CustomForm = (props) => {
                         value={secondInput}
                     />
                     {secondInputHasError && <p className={classes.errorText}>Value of {props.secondLabel} is required!</p>}
-                    <p id='max-char'>
-                        Optional description but not including cultivation type, region & varieties. (50 characters)
-                    </p>
                 </div>
                 <div className={classes.container}>
                     <label htmlFor='variety'>{props.thirdLabel}</label>
@@ -154,12 +147,12 @@ const CustomForm = (props) => {
                     )}
                 </div>
                 <div className={classes.btnContainer}>
-                    <button className='btnCancel' type='button' onClick={resetHandler}>
+                    <Button variant='danger' type='button' onClick={resetHandler}>
                         Cancel
-                    </button>
-                    <button className='btn' disabled={!formIsValid}>
+                    </Button>
+                    <Button variant='primary' type='submit' disabled={!formIsValid}>
                         Save
-                    </button>
+                    </Button>
                 </div>
             </Form>
         </>
