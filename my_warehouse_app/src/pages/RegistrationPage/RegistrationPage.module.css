@@ -8,3 +8,7 @@ span {
     cursor: pointer;
     text-decoration: underline;
 }
+
+.mainContainer{
+    align-items: center;
+}

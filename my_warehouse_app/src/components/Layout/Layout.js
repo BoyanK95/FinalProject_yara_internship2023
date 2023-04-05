@@ -7,10 +7,6 @@ import { useState } from 'react';
 const Layout = ({ children }) => {
     const [sideBarIsVisible, setSideBarIsVisible] = useState(false);
 
-    function setSideBarIsVisibleHandler() {
-        setSideBarIsVisible(true);
-    }
-
     function toggleSideBarIsNotVisibleHandler() {
         setSideBarIsVisible(!sideBarIsVisible);
     }
@@ -19,9 +15,7 @@ const Layout = ({ children }) => {
         <Fragment>
             <div
                 className={classes.mainWrapper}
-                onMouseEnter={setSideBarIsVisibleHandler}
                 onClick={toggleSideBarIsNotVisibleHandler}
-                // onMouseLeave={setSideBarIsNotVisibleHandler}
             >
                 <TopHeader />
             </div>

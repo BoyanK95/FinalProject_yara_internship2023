@@ -5,7 +5,8 @@
     position: absolute;
     margin: 3rem auto;
     width: 90%;
-    /* height: 5rem; */
+    display: flex;
+    justify-content: center;
 } 
 
 .mainWrapper:hover > .sidebar {

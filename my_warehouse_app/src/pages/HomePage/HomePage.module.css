@@ -1,0 +1,33 @@
+.title {
+    padding: 2rem;
+    color: rgb(4, 4, 73);
+    text-shadow: 3px 3px 7px rgba(0, 0, 0, .35);
+    
+}
+
+p {
+ color: rgb(34, 46, 99);
+}
+
+ul {
+    width: 80%;
+    text-decoration: none;
+    text-align: center;
+    list-style: none;
+}
+
+.features {
+    display: flex;
+    text-decoration: overline;
+    justify-content: center;
+    align-items: center;
+    
+}
+.featuresContainer{
+    align-items: center;
+    text-align: center;
+    display: flex;
+    padding: 4rem;
+    border: 2px dotted darkblue;
+    justify-content: center;
+}

@@ -1,7 +1,8 @@
 .sidebar {
+    animation: animate-in 0.8s ease-out forwards;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     width: 10rem;
     height: calc(100vh - 5rem);
     box-sizing: border-box;
@@ -19,8 +20,8 @@
 }
 
 .sidebar li {
-    margin: 4.1rem 0rem;
-    padding: 2.13rem 0;
+    margin: 4rem 0rem;
+    padding: 2rem 0;
     margin: 12rem 0;
     text-align: center;
 }
@@ -41,4 +42,13 @@
 
 .sidebar p {
     padding: 0.2rem;
+}
+
+@keyframes animate-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 
 const TopHeader = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+
     const history = useHistory()
 
     function navigateRegister() {

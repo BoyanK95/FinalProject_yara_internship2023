@@ -12,6 +12,7 @@ function RegistrationPage() {
     return (
         <div className='centered'>
             <h2>Register here:</h2>
+            <div className='mainContainer'>
             <CustomForm
                 firstLabel='E-mail@'
                 secondLabel='Username'
@@ -19,6 +20,7 @@ function RegistrationPage() {
                 fourthLabel='Confirm-Password'
                 fifthLabel='Country'
             />
+            </div>
             <div>
                 <p>
                     Are you already registered? <span onClick={logInHandler}>Log in</span>
