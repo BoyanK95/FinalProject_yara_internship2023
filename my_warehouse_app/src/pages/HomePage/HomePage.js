@@ -36,7 +36,7 @@ function HomePage() {
                     <li>
                         Track stock movement in and out of each <span onClick={goToWareHouses}>warehouse,</span>
                     </li>
-                    <li>Manage hazardous and non-hazardous products separately,</li>
+                    <li>Manage <span className='dangerous'>hazardous</span> and non-hazardous products separately,</li>
                     <li>
                         Record <span onClick={goToProducts}>product details</span> such as amount and date,
                     </li>
