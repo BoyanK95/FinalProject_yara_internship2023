@@ -1,7 +1,7 @@
 function ProductsPage() {
     return (
         <div className="centered">
-            <h1>Products Page</h1>
+            <h1 className="title">Products Page</h1>
         </div>
     );
 }

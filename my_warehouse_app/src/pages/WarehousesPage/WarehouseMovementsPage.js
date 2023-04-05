@@ -1,9 +1,9 @@
-function WarehouseMovementsPage() {
+function WarehousesPage() {
     return (
         <div className="centered">
-            <h1>Warehouses Page</h1>
+            <h1 className="title">Warehouses:</h1>
         </div>
     );
 }
 
-export default WarehouseMovementsPage;
+export default WarehousesPage;
