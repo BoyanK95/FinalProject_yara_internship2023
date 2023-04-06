@@ -10,13 +10,16 @@ const Layout = ({ children }) => {
     function toggleSideBarVisibleHandler() {
         setSideBarIsVisible(!sideBarIsVisible);
     }
+    function showSideBarVisibleHandler() {
+        setSideBarIsVisible(true);
+    }
 
     return (
         <Fragment>
             <div
                 className={classes.mainWrapper}
                 onClick={toggleSideBarVisibleHandler}
-                onMouseEnter={toggleSideBarVisibleHandler}
+                onMouseEnter={showSideBarVisibleHandler}
                 // onMouseLeave={toggleSideBarVisibleHandler}
             >
                 <TopHeader />
