@@ -57,7 +57,7 @@ const CustomForm = (props) => {
     let formIsValid = false;
     // console.log(formIsValid);
 
-    if (firstInputIsValid && secondInputIsValid && thirdInputIsValid && fourthInputIsValid && fifthInputIsValid) {
+    if (firstInputIsValid && secondInputIsValid && thirdInputIsValid) {
         formIsValid = true;
     }
 
@@ -74,13 +74,11 @@ const CustomForm = (props) => {
         console.log(fourthInput);
         console.log(fifthInput);
 
-        // const id = Math.floor(Math.random() * 100000);
+        
         // props.onSubmit({
-        //     id: id,
-        //     firstTd: firstInput,
-        //     secondTd: secondInput,
-        //     thirdTd: thirdInput,
-        //     numberTd: fourthInput
+        //     firstInput: firstInput,
+        //     secondInput: secondInput,
+        //     thirdInput: thirdInput,
         // });
 
         resetHandler();

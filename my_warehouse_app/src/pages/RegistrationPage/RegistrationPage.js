@@ -5,7 +5,7 @@ import './RegistrationPage.module.css';
 function RegistrationPage() {
     const history = useHistory();
 
-    function logInHandler() {
+    function goToLoginPage() {
         history.push('/login')
     }
 
@@ -23,7 +23,7 @@ function RegistrationPage() {
             </div>
             <div>
                 <p>
-                    Are you already registered? <span onClick={logInHandler}>Log in</span>
+                    Are you already registered? <span onClick={goToLoginPage}>Log in</span>
                 </p>
             </div>
         </div>
