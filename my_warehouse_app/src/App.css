@@ -6,6 +6,7 @@ body {
 
 .centered {
   text-align: center;
+  align-items: center;
   width: 70%;
 }
 
