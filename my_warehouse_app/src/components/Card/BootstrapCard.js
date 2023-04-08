@@ -12,7 +12,8 @@ function BootsrapCard({ children, title, image, backUpSrc }) {
             )}
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
-                <Card.Text>{children}</Card.Text>
+                {children && <Card.Text>{children}</Card.Text>}
+                {!children && <p>There is no description for this item!</p>}
                 <Button variant='outline-primary'>Details</Button>
             </Card.Body>
         </Card>
