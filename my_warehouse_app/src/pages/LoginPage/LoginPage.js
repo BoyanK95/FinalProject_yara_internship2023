@@ -1,6 +1,9 @@
 import CustomForm from '../../components/Form/CustomForm';
 
 function LoginPage() {
+    function loginHandler(formData) {
+        console.log(formData);
+    }
     return (
         <div className='centered'>
             <div>
@@ -8,6 +11,7 @@ function LoginPage() {
             </div>
             <div>
                 <CustomForm
+                    onSubmit={loginHandler}
                     firstLabel='E-mail@'
                     secondLabel='Username'
                     thirdLabel='Password:'

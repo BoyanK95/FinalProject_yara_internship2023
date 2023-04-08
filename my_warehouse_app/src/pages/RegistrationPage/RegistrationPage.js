@@ -5,7 +5,7 @@ import './RegistrationPage.module.css';
 function RegistrationPage() {
     const history = useHistory();
 
-    function submitHandler(formData) {
+    function registrationHandler(formData) {
         console.log(formData);
     }
 
@@ -18,7 +18,7 @@ function RegistrationPage() {
             <h2>Register here:</h2>
             <div className='mainContainer'>
             <CustomForm
-                onSubmit={submitHandler}
+                onSubmit={registrationHandler}
                 firstLabel='E-mail@'
                 secondLabel='Username'
                 thirdLabel='Password'

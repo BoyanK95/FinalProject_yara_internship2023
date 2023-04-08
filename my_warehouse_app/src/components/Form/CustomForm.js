@@ -37,7 +37,7 @@ const CustomForm = (props) => {
 
     const {
         value: fourthInput,
-        isValid: fourthInputIsValid,
+        // isValid: fourthInputIsValid,
         hasError: fourthInputHasError,
         valueChangeHandler: fourthInputHandler,
         inputBlurHandler: fourthInputBlurHandler,
@@ -63,9 +63,14 @@ const CustomForm = (props) => {
     function formSubmitHandler(e) {
         e.preventDefault();
         // console.log(formIsValid);
-        // if (!formIsValid) {
-        //     return;
-        // }
+        if (!formIsValid) {
+            return;
+        }
+        if (fourthInput) {
+            if (fourthInput !== thirdInput) {
+                return alert("Passwords don't match!")
+            }
+        }
         console.log('SIBMITED');
         // console.log(firstInput);
         // console.log(secondInput);
