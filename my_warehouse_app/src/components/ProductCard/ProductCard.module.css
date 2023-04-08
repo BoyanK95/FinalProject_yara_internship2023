@@ -2,3 +2,11 @@
     width: 18rem;
     background-image: linear-gradient(to right, rgb(208, 227, 236), rgb(161, 173, 224));
 }
+
+.hazardous {
+    border: 5px solid red;
+}
+
+.normal{
+    border: 3px solid darkgray;
+}

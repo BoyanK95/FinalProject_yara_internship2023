@@ -48,6 +48,7 @@ function ProductsPage() {
                                                 hazardous={product.hazardous}
                                                 quantity={product.quantity}
                                                 unit={product.unit}
+                                                updatedAt={product.updatedAt}
                                                 backUpSrc={
                                                     'https://www.4me.com/wp-content/uploads/2018/01/4me-icon-product.png'
                                                 }

@@ -59,7 +59,7 @@ function WarehousesPage() {
                     {data && data.length === 0 && !isLoading && !error && <h4>There are no products to display!</h4>}
                 </div>
             )}
-            <Button onClick={productsAreVisibleToggler}>{btnText}</Button>
+            <Button className={classes.button} onClick={productsAreVisibleToggler}>{btnText}</Button>
         </div>
     );
 }
