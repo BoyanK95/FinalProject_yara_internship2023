@@ -3,31 +3,30 @@ import BootsrapCard from '../../components/Card/BootstrapCard';
 import Button from 'react-bootstrap/Button';
 import { InfinitySpiner } from '../../components/LoadingSpiner/InfinitySpiner';
 import useHttp from '../../hooks/use-http';
-import classes from './ProductPage.module.css';
 import Content from '../../components/Content/Content';
-// import ItemComponent from '../../components/ItemComponent/ItemComponent';
+import classes from './WarehousesPage.module.css'
 
-function ProductsPage() {
-    const [productsAreVisible, setProductsAreVisible] = useState(false);
-    const { data, error, isLoading } = useHttp('http://localhost:3001/products', 'GET', null, 1000);
+function WarehousesPage() {
+    const [warehousesAreVisible, setWarehousesAreVisible] = useState(false);
+    const { data, error, isLoading } = useHttp('http://localhost:3001/warehouses', 'GET', null, 1000);
 
-    let btnText = 'Show Products';
-    if (productsAreVisible) {
-        btnText = 'Close Products';
+    let btnText = 'Show Warehouses';
+    if (warehousesAreVisible) {
+        btnText = 'Close Warehouses';
     }
 
     function productsAreVisibleToggler() {
-        setProductsAreVisible(!productsAreVisible);
+        setWarehousesAreVisible(!warehousesAreVisible);
     }
 
     console.log(data);
 
     return (
         <div className='centered'>
-            <h1 className='title'>Welcome to the Products page!</h1>
-            {!productsAreVisible && <Content item={'product'} />}
+            <h1 className='title'>Welcome to the Warehouses page!</h1>
+            {!warehousesAreVisible && <Content item={'warehouse'} />}
             {/* <ItemComponent isLoading={isLoading} error={error} data={data} /> Doesn't work cause of how react components work, cause the first render is always null */}
-            {productsAreVisible && (
+            {warehousesAreVisible && (
                 <div>
                     {isLoading && <InfinitySpiner />}
                     {!isLoading && error && !data && (
@@ -38,7 +37,7 @@ function ProductsPage() {
                     )}
                     {data && !isLoading && !error &&(
                         <>
-                            <h4>These are your products:</h4>
+                            <h4>These are your warehouses:</h4>
                             <div className={classes.container}>
                                 {data.map((product) => {
                                     return (
@@ -47,7 +46,7 @@ function ProductsPage() {
                                                 image={product.picture}
                                                 title={product.name}
                                                 backUpSrc={
-                                                    'https://www.4me.com/wp-content/uploads/2018/01/4me-icon-product.png'
+                                                    'https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/1795385/warehouse-clipart-md.png'
                                                 }
                                             >
                                                 {product.description}
@@ -65,4 +64,4 @@ function ProductsPage() {
     );
 }
 
-export default ProductsPage;
+export default WarehousesPage;

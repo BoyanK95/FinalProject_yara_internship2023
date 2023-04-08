@@ -20,7 +20,7 @@ h4 {
         transform: translateY(3rem);
     }
     65% {
-        transform: translateY(-3rem);
+        transform: translateY(-5rem);
     }
     85% {
         transform: translateY(2rem);
