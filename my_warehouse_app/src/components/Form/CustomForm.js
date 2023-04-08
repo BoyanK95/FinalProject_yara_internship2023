@@ -5,7 +5,6 @@ import classes from './Form.module.css';
 import isNotEmpty from '../../hooks/isNotEmpty';
 import { useHistory } from 'react-router-dom';
 
-
 const CustomForm = (props) => {
     const history = useHistory();
 
@@ -47,8 +46,8 @@ const CustomForm = (props) => {
 
     const {
         value: fifthInput,
-        isValid: fifthInputIsValid,
-        hasError:fifthInputHasError,
+        // isValid: fifthInputIsValid,
+        hasError: fifthInputHasError,
         valueChangeHandler: fifthInputHandler,
         inputBlurHandler: fifthInputBlurHandler,
         reset: resetFifthInput
@@ -64,22 +63,23 @@ const CustomForm = (props) => {
     function formSubmitHandler(e) {
         e.preventDefault();
         // console.log(formIsValid);
-        if (!formIsValid) {
-            return;
-        }
+        // if (!formIsValid) {
+        //     return;
+        // }
         console.log('SIBMITED');
-        console.log(firstInput);
-        console.log(secondInput);
-        console.log(thirdInput);
-        console.log(fourthInput);
-        console.log(fifthInput);
+        // console.log(firstInput);
+        // console.log(secondInput);
+        // console.log(thirdInput);
+        // console.log(fourthInput);
+        // console.log(fifthInput);
 
-        
-        // props.onSubmit({
-        //     firstInput: firstInput,
-        //     secondInput: secondInput,
-        //     thirdInput: thirdInput,
-        // });
+        props.onSubmit({
+            firstInput,
+            secondInput,
+            thirdInput,
+            fourthInput,
+            fifthInput
+        });
 
         resetHandler();
     }
@@ -89,7 +89,7 @@ const CustomForm = (props) => {
         resetSecondInput();
         resetThirdInput();
         resetFourthInput();
-        resetFifthInput()
+        resetFifthInput();
 
         history.push('/');
     }

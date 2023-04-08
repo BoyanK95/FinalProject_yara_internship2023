@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import BootsrapCard from '../../components/Card/BootstrapCard';
+import WarehousesCard from '../../components/WarehousesCard/WarehousesCard';
 import Button from 'react-bootstrap/Button';
-import { InfinitySpiner } from '../../components/LoadingSpiner/InfinitySpiner';
 import useHttp from '../../hooks/use-http';
 import Content from '../../components/Content/Content';
-import classes from './WarehousesPage.module.css'
+import classes from './WarehousesPage.module.css';
+import { BlockSpiner } from '../../components/LoadingSpiner/BlocksSpiner';
 
 function WarehousesPage() {
     const [warehousesAreVisible, setWarehousesAreVisible] = useState(false);
@@ -25,24 +25,23 @@ function WarehousesPage() {
         <div className='centered'>
             <h1 className='title'>Welcome to the Warehouses page!</h1>
             {!warehousesAreVisible && <Content item={'warehouse'} />}
-            {/* <ItemComponent isLoading={isLoading} error={error} data={data} /> Doesn't work cause of how react components work, cause the first render is always null */}
             {warehousesAreVisible && (
                 <div>
-                    {isLoading && <InfinitySpiner />}
+                    {isLoading && <BlockSpiner />}
                     {!isLoading && error && !data && (
                         <>
                             <h2 className='bold'>Status code: {error?.response.status}</h2>
-                            <h4 style={{margin: '2rem'}}>{error?.response.statusText}!</h4>
+                            <h4 style={{ margin: '2rem' }}>{error?.response.statusText}!</h4>
                         </>
                     )}
-                    {data && !isLoading && !error &&(
+                    {data && data.length > 0 && !isLoading && !error && (
                         <>
                             <h4>These are your warehouses:</h4>
                             <div className={classes.container}>
                                 {data.map((product) => {
                                     return (
-                                        <div className={classes.product} key={product.id}>
-                                            <BootsrapCard
+                                        <div className={classes.warehouse} key={product.id}>
+                                            <WarehousesCard
                                                 image={product.picture}
                                                 title={product.name}
                                                 backUpSrc={
@@ -50,13 +49,14 @@ function WarehousesPage() {
                                                 }
                                             >
                                                 {product.description}
-                                            </BootsrapCard>
+                                            </WarehousesCard>
                                         </div>
                                     );
                                 })}
                             </div>
                         </>
                     )}
+                    {data && data.length === 0 && !isLoading && !error && <h4>There are no products to display!</h4>}
                 </div>
             )}
             <Button onClick={productsAreVisibleToggler}>{btnText}</Button>

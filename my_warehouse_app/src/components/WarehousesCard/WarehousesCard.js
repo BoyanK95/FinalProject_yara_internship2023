@@ -1,9 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import classes from './BootsrapCard.module.css';
+import classes from './Warehouses.module.css'
 import { useState } from 'react';
 
-function BootsrapCard({ children, title, image, backUpSrc }) {
+function WarehousesCard({ children, title, image, backUpSrc }) {
     const [showDetails, setShowDetails] = useState(false)
 
     function detailsToggler() {
@@ -28,4 +28,4 @@ function BootsrapCard({ children, title, image, backUpSrc }) {
     );
 }
 
-export default BootsrapCard;
+export default WarehousesCard;
