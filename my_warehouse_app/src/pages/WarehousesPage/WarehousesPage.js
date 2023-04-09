@@ -30,8 +30,12 @@ function WarehousesPage() {
                     {isLoading && <BlockSpiner />}
                     {!isLoading && error && !data && (
                         <>
-                            <h2 className='bold'>Status code: {error?.response.status}</h2>
-                            <h4 style={{ margin: '2rem' }}>{error?.response.statusText}!</h4>
+                            {error.response.status && <h2 className='bold'>Status code: {error?.response.status}</h2>}
+                            {error.response.statusText ? (
+                                <h4 style={{ margin: '2rem' }}>{error?.response.statusText}!</h4>
+                            ) : (
+                                <h4>There has been a problem with the server</h4>
+                            )}
                         </>
                     )}
                     {data && data.length > 0 && !isLoading && !error && (
@@ -42,6 +46,7 @@ function WarehousesPage() {
                                     return (
                                         <div className={classes.warehouse} key={warehouse.id}>
                                             <WarehousesCard
+                                                id={warehouse.id}
                                                 image={warehouse.picture}
                                                 title={warehouse.name}
                                                 hazardous={warehouse.hazardous}
@@ -64,7 +69,9 @@ function WarehousesPage() {
                     {data && data.length === 0 && !isLoading && !error && <h4>There are no products to display!</h4>}
                 </div>
             )}
-            <Button className={classes.button} onClick={productsAreVisibleToggler}>{btnText}</Button>
+            <Button className={classes.button} onClick={productsAreVisibleToggler}>
+                {btnText}
+            </Button>
         </div>
     );
 }

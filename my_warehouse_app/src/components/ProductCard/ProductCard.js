@@ -12,8 +12,10 @@ function ProductCard({ children, title, image, hazardous, unit, quantity, create
         setShowDetails(!showDetails);
     }
 
-    function editHandler() {
-        
+    function editHandler() {}
+
+    function deleteProductHandler() {
+
     }
 
     return (
@@ -44,16 +46,19 @@ function ProductCard({ children, title, image, hazardous, unit, quantity, create
                                 <p>Create at: {displayDateHandler(createdAt)}</p>
                                 <p>Updated at: {displayDateHandler(updatedAt)}</p>
                             </div>
-                            <div>
-                                <Button style={{ margin: '1rem' }} variant='warning' onClick={editHandler}>
+                            <div className={classes.btnContainer}>
+                                <Button style={{ margin: '0.5rem' }} variant='warning' onClick={editHandler}>
                                     Edit
                                 </Button>
                                 <Button
-                                    style={{ margin: '1rem' }}
-                                    variant='outline-danger'
+                                    style={{ margin: '0.5rem' }}
+                                    variant='outline-primary'
                                     onClick={detailsToggleHandler}
                                 >
                                     Close
+                                </Button>
+                                <Button style={{ margin: '0.5rem' }} variant='danger' onClick={deleteProductHandler}>
+                                    Delete
                                 </Button>
                             </div>
                         </Card.Body>

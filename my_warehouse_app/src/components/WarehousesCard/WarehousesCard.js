@@ -3,9 +3,10 @@ import Card from 'react-bootstrap/Card';
 import classes from './Warehouses.module.css';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
+// import axios from 'axios';
 import { displayDateHandler } from '../../hooks/displayDateHandler';
 
-function WarehousesCard({ children, title, image, backUpSrc, hazardous, location, storage, createdAt, updatedAt }) {
+function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, location, storage, createdAt, updatedAt }) {
     const [showDetails, setShowDetails] = useState(false);
 
     function detailsToggleHandler() {
@@ -13,6 +14,27 @@ function WarehousesCard({ children, title, image, backUpSrc, hazardous, location
     }
 
     function editHandler() {}
+
+    function deleteWarehouseHandler() {
+        const confirmDelete = window.confirm(`Are you sure you want to delete the warehouse with title: ${title}?`);
+        if (confirmDelete) {
+            return fetch(`http://localhost:3001/warehouses/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .catch((error) => {
+                    console.error('There was a problem with the DELETE request:', error);
+                });
+        }
+    }
 
     return (
         <Card className={classes.card}>
@@ -42,18 +64,20 @@ function WarehousesCard({ children, title, image, backUpSrc, hazardous, location
                                 <p>Updated at: {displayDateHandler(updatedAt)}</p>
                             </div>
                             <div>
-                                <Button style={{ margin: '1rem' }} variant='warning' onClick={editHandler}>
+                                <Button style={{ margin: '0.5rem' }} variant='warning' onClick={editHandler}>
                                     Edit
                                 </Button>
                                 <Button
-                                    style={{ margin: '1rem' }}
-                                    variant='outline-danger'
+                                    style={{ margin: '0.5rem' }}
+                                    variant='outline-primary'
                                     onClick={detailsToggleHandler}
                                 >
                                     Close
                                 </Button>
+                                <Button style={{ margin: '0.5rem' }} variant='danger' onClick={deleteWarehouseHandler}>
+                                    Delete
+                                </Button>
                             </div>
-                            <Button variant='danger'>Delete</Button>
                         </Card.Body>
                     </Card>
                 </Modal>
