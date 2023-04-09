@@ -1,7 +1,10 @@
 .container {
-    padding: 3rem;
     display: flex;
     justify-content: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 .product {
@@ -14,16 +17,22 @@ h4 {
     animation: animate-in-header 1s ease-out forwards;
 }
 
+.button {
+    margin: 2rem;
+}
+
 @keyframes animate-in {
-    from {
+     from {
         opacity: 0;
-        transform: translateY(3rem);
+        transform: translateY(0.4rem);
     }
     65% {
-        transform: translateY(-3rem);
+        opacity: 0.7;
+        transform: translateY(0rem);
     }
     85% {
-        transform: translateY(2rem);
+        opacity: 0.6;
+        transform: translateY(0.5rem);
     }
     to {
         opacity: 1;

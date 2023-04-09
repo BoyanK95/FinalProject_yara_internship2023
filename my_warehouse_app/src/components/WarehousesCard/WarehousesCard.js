@@ -53,6 +53,7 @@ function WarehousesCard({ children, title, image, backUpSrc, hazardous, location
                                     Close
                                 </Button>
                             </div>
+                            <Button variant='danger'>Delete</Button>
                         </Card.Body>
                     </Card>
                 </Modal>
