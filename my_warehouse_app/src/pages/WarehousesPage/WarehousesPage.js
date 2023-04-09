@@ -38,17 +38,22 @@ function WarehousesPage() {
                         <>
                             <h4>These are your warehouses:</h4>
                             <div className={classes.container}>
-                                {data.map((product) => {
+                                {data.map((warehouse) => {
                                     return (
-                                        <div className={classes.warehouse} key={product.id}>
+                                        <div className={classes.warehouse} key={warehouse.id}>
                                             <WarehousesCard
-                                                image={product.picture}
-                                                title={product.name}
+                                                image={warehouse.picture}
+                                                title={warehouse.name}
+                                                hazardous={warehouse.hazardous}
+                                                location={warehouse.location}
+                                                storage={warehouse.storage}
+                                                createdAt={warehouse.createdAt}
+                                                updatedAt={warehouse.updatedAt}
                                                 backUpSrc={
                                                     'https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/1795385/warehouse-clipart-md.png'
                                                 }
                                             >
-                                                {product.description}
+                                                {warehouse.description}
                                             </WarehousesCard>
                                         </div>
                                     );

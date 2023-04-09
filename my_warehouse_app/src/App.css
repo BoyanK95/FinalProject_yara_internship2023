@@ -1,26 +1,38 @@
 body {
-  margin: 0;
-  padding: 0;
-  background-image: linear-gradient(to right, rgb(222, 229, 233), rgb(152, 166, 225));
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to right, rgb(222, 229, 233), rgb(152, 166, 225));
 }
 
 .centered {
-  text-align: center;
-  align-items: center;
-  width: 70%;
+    text-align: center;
+    /* align-items: center; */
+    width: 80%;
 }
 
 .title {
-  padding: 2rem;
-  color: rgb(4, 4, 73);
-  text-shadow: 3px 3px 7px rgba(0, 0, 0, .35);
-  
+    padding: 2rem;
+    color: rgb(4, 4, 73);
+    text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.35);
 }
 
-.dangerous{
-  color: red;
+.dangerous {
+    color: red;
 }
 
 .bold {
-  font-weight: bold;
+    font-weight: bold;
+}
+
+#modal-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card {
+  align-items: center;
+    background-color: lightblue;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }

@@ -4,14 +4,14 @@ import classes from './ProductCard.module.css';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
 
-function ProductCard({ children, title, image, hazardous, unit, quantity, backUpSrc }) {
+function ProductCard({ children, title, image, hazardous, unit, quantity, createdAt, updatedAt,  backUpSrc }) {
     const [showDetails, setShowDetails] = useState(false);
 
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
     }
-    console.log(hazardous);
-    const divContainerClass = hazardous ? classes.hazardous : classes.normal
+
+    function editHandler() {}
 
     return (
         <Card className={classes.card}>
@@ -26,24 +26,29 @@ function ProductCard({ children, title, image, hazardous, unit, quantity, backUp
                 </Button>
             </Card.Body>
             {showDetails && (
-                <div >
-                    <Modal className={divContainerClass} onClose={detailsToggleHandler}>
-                        {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img src={image} alt={title} />}
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>{title}</Card.Title>
-                                <Card.Text>
-                                    Quantity: {quantity} / {unit}
-                                </Card.Text>
-                                {children && <Card.Text>{children}</Card.Text>}
-                                {!children && <p>There is no description for this item!</p>}
-                                <Button variant='outline-danger' onClick={detailsToggleHandler}>
+                <Modal onClose={detailsToggleHandler}>
+                    {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img src={image} alt={title} />}
+                    <Card>
+                        <Card.Body className='centered'>
+                            <Card.Title>{title}</Card.Title>
+                            <br />
+                            <Card.Text>
+                                Quantity: {quantity} / {unit}
+                            </Card.Text>
+                            {children && <Card.Text>{children}</Card.Text>}
+                            {!children && <p>There is no description for this item!</p>}
+                            <br />
+                            <div>
+                                <Button style={{margin: '1rem'}} variant='warning' onClick={editHandler}>
+                                    Edit
+                                </Button>
+                                <Button style={{margin: '1rem'}} variant='outline-danger' onClick={detailsToggleHandler}>
                                     Close
                                 </Button>
-                            </Card.Body>
-                        </Card>
-                    </Modal>
-                </div>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                </Modal>
             )}
         </Card>
     );

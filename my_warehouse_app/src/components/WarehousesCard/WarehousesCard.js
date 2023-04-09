@@ -2,13 +2,16 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import classes from './Warehouses.module.css'
 import { useState } from 'react';
+import Modal from '../Modal/Modal';
 
 function WarehousesCard({ children, title, image, backUpSrc }) {
     const [showDetails, setShowDetails] = useState(false)
 
-    function detailsToggler() {
+    function detailsToggleHandler() {
         setShowDetails(!showDetails)
     }
+
+    function editHandler() {}
 
     return (
         <Card className={classes.card}>
@@ -22,8 +25,33 @@ function WarehousesCard({ children, title, image, backUpSrc }) {
                 {children && <Card.Text>{children}</Card.Text>}
                 {!children && <p>There is no description for this item!</p>}
                 <Card.Text></Card.Text>
-                <Button variant='outline-primary' onClick={detailsToggler}>Details</Button>
+                <Button variant='outline-primary' onClick={detailsToggleHandler}>Details</Button>
             </Card.Body>
+            {showDetails && (
+                <Modal onClose={detailsToggleHandler}>
+                    {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img src={image} alt={title} />}
+                    <Card>
+                        <Card.Body className='centered'>
+                            <Card.Title>{title}</Card.Title>
+                            <br />
+                            <Card.Text>
+                                
+                            </Card.Text>
+                            {children && <Card.Text>{children}</Card.Text>}
+                            {!children && <p>There is no description for this item!</p>}
+                            <br />
+                            <div>
+                                <Button style={{margin: '1rem'}} variant='warning' onClick={editHandler}>
+                                    Edit
+                                </Button>
+                                <Button style={{margin: '1rem'}} variant='outline-danger' onClick={detailsToggleHandler}>
+                                    Close
+                                </Button>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                </Modal>
+            )}
         </Card>
     );
 }
