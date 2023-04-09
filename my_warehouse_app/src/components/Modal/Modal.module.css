@@ -9,10 +9,10 @@
 }
 
 .modal {
-    height: 43rem;
+    height: 47rem;
     margin-top: 5rem;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-    padding: 3rem 7rem;
+    padding: 3rem 9rem;
     overflow: hidden;
     z-index: 1;
     position: absolute;

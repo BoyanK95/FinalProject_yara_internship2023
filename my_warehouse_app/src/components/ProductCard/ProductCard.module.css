@@ -10,3 +10,14 @@
 .normal{
     border: 3px solid darkgray;
 }
+
+.dateContainer p {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgb(94, 120, 153);
+}
+
+.quantity{
+    font-weight: 800;
+    color: rgb(1, 1, 118);
+}

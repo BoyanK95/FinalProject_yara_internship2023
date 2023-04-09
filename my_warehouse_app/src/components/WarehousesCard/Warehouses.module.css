@@ -5,3 +5,14 @@
     scroll-snap-align: start;
     margin-right: 1rem;
 }
+
+.dateContainer p {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgb(94, 120, 153);
+}
+
+.storage{
+    font-weight: 800;
+    color: rgb(1, 1, 118);
+}
