@@ -45,17 +45,17 @@ const AddItemForm = (props) => {
     } = useInput(isNotEmpty);
 
     const {
-        value: fifthInput,
-        // isValid: fifthInputIsValid,
-        hasError: fifthInputHasError,
-        valueChangeHandler: fifthInputHandler,
-        inputBlurHandler: fifthInputBlurHandler,
-        reset: resetFifthInput
+        value: numberInput,
+        isValid: numberInputIsValid,
+        hasError: numberInputHasError,
+        valueChangeHandler: numberInputHandler,
+        inputBlurHandler: numberInputBlurHandler,
+        reset: resetNumberInput
     } = useInput(isNotEmpty);
 
     const {
         value: hazardousInput,
-        // isValid: fifthInputIsValid,
+        isValid: hazardousInputIsValid,
         hasError: hazardousInputHasError,
         valueChangeHandler: hazardousInputHandler,
         inputBlurHandler: hazardousInputBlurHandler,
@@ -65,7 +65,7 @@ const AddItemForm = (props) => {
     let formIsValid = false;
     // console.log(formIsValid);
 
-    if (nameInputIsValid && secondInputIsValid && thirdInputIsValid) {
+    if (nameInputIsValid && secondInputIsValid && numberInputIsValid && hazardousInputIsValid) {
         formIsValid = true;
     }
 
@@ -80,14 +80,14 @@ const AddItemForm = (props) => {
         // console.log(secondInput);
         // console.log(thirdInput);
         // console.log(fourthInput);
-        // console.log(fifthInput);
+        // console.log(numberInput);
 
         props.onSubmit({
             name,
             secondInput,
             thirdInput,
             fourthInput,
-            fifthInput,
+            numberInput,
             hazardousInput
         });
 
@@ -99,7 +99,7 @@ const AddItemForm = (props) => {
         resetSecondInput();
         resetThirdInput();
         resetFourthInput();
-        resetFifthInput();
+        resetNumberInput();
         resetHazardousInput()
 
         history.push(`/${props.goTo}`);
@@ -109,8 +109,8 @@ const AddItemForm = (props) => {
     const secondInputClass = !secondInputHasError ? classes.input : classes.error;
     const thirdhInputClass = !thirdInputHasError ? classes.input : classes.error;
     const fourthInputClass = !fourthInputHasError ? classes.input : classes.error;
-    const fifthInputClass = !fifthInputHasError ? classes.input : classes.error;
-    const hazardousInputClass = !fifthInputHasError ? classes.input : classes.error;
+    const numberInputClass = !numberInputHasError ? classes.input : classes.error;
+    // const hazardousInputClass = !hazardousInputHasError ? classes.input : classes.error;
 
     return (
         <>
@@ -147,17 +147,17 @@ const AddItemForm = (props) => {
                     )}
                 </div>
                 <div className={classes.container}>
-                    <label htmlFor='variety'>{props.thirdLabel}</label>
+                    <label htmlFor={props.thirdInput}>{props.thirdLabel}</label>
                     <input
                         className={thirdhInputClass}
-                        type='password'
-                        name='password'
+                        type='text' //Could have been type file but a little more work with the css
+                        name='thirdLabel'
                         onBlur={thirdInputBlurHandler}
                         onChange={thirdInputHandler}
                         value={thirdInput}
                     />
                     {thirdInputHasError && (
-                        <p className={classes.errorText}>Value of {props.thirdLabel} is required!</p>
+                        <p className={classes.errorText}>Value of {props.thirdLabel} is not required, but good to add!</p>
                     )}
                 </div>
                 {props.fourthLabel && (
@@ -165,31 +165,31 @@ const AddItemForm = (props) => {
                         <label htmlFor={props.fourthLabel}>{props.fourthLabel}</label>
                         <input
                             className={fourthInputClass}
-                            type='password'
+                            type='text'
                             name='fourthInput'
                             onBlur={fourthInputBlurHandler}
                             onChange={fourthInputHandler}
                             value={fourthInput}
                         />
                         {fourthInputHasError && (
-                            <p className={classes.errorText}>Value of {props.fourthLabel} is required!</p>
+                            <p className={classes.errorText}>Value of {props.fourthLabel} is not required, but good to add!</p>
                         )}
                     </div>
                 )}
-                {props.fifthLabel && (
+                {props.numberLabel && (
                     <div className={classes.container}>
-                        <label htmlFor={props.fifthLabel}>{props.fifthLabel}</label>
+                        <label htmlFor={props.numberLabel}>{props.numberLabel}</label>
                         <input
-                            className={fifthInputClass}
-                            type='text'
-                            maxLength={2}
-                            name='fifthInput'
-                            onBlur={fifthInputBlurHandler}
-                            onChange={fifthInputHandler}
-                            value={fifthInput}
+                            className={numberInputClass}
+                            type='number'
+                            name='numberInput'
+                            onBlur={numberInputBlurHandler}
+                            onChange={numberInputHandler}
+                            value={numberInput}
+                            min={0}
                         />
-                        {fifthInputHasError && (
-                            <p className={classes.errorText}>Value of {props.fifthLabel} is required!</p>
+                        {numberInputHasError && (
+                            <p className={classes.errorText}>Value of {props.numberLabel} is required!</p>
                         )}
                     </div>
                 )}
@@ -197,8 +197,8 @@ const AddItemForm = (props) => {
                     <div className={classes.container}>
                         <label htmlFor='hazardous'>{props.hazardousLabel}</label>
                         <select
-                            className={hazardousInputClass}
-                            name='hazardous' // add name attribute to select element
+                            // className={hazardousInputClass}
+                            name='hazardous'
                             onBlur={hazardousInputBlurHandler}
                             onChange={hazardousInputHandler}
                             value={hazardousInput}
@@ -214,8 +214,8 @@ const AddItemForm = (props) => {
                 )}
 
                 <div className={classes.btnContainer}>
-                    <Button className={classes.button} variant='danger' type='button' onClick={resetHandler}>
-                        Cancel
+                    <Button className={classes.button} variant='outline-danger' type='button' onClick={resetHandler}>
+                        Reset
                     </Button>
 
                     <Button className={classes.button} variant='primary' type='submit' disabled={!formIsValid}>
