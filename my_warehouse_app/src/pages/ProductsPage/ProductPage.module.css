@@ -13,6 +13,10 @@
     animation: animate-in 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
+.addItemCard {
+    background-image: linear-gradient(rgb(242, 248, 253), rgb(193, 227, 247));
+}
+
 h4 {
     animation: animate-in-header 1s ease-out forwards;
 }
@@ -22,7 +26,7 @@ h4 {
 }
 
 @keyframes animate-in {
-     from {
+    from {
         opacity: 0;
         transform: translateY(0.4rem);
     }
