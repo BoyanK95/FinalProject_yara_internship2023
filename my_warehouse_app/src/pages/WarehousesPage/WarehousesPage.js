@@ -31,16 +31,28 @@ function WarehousesPage() {
     }
 
     function translateStringToBoolean(str) {
-       return str = 'true' ? true : false
+        return (str = 'true' ? true : false);
+    }
+
+    function translateStringToNumber(str) {
+        return Number(str);
     }
 
     function addWarehouseHandler(data) {
-        console.log(data);
+        // console.log(data);
+        // console.log({
+        //     name: data.name,
+        //     location: data.secondInput,
+        //     storage: translateStringToNumber(data.numberInput),
+        //     hazardous: translateStringToBoolean(data.hazardousInput),
+        //     description: data.fourthInput,
+        //     picture: data.thirdInput
+        // });
         axios
             .post('http://localhost:3001/warehouses', {
-                name: data.firstInputValue,
+                name: data.name,
                 location: data.secondInput,
-                storage: data.numberInput,
+                storage: translateStringToNumber(data.numberInput),
                 hazardous: translateStringToBoolean(data.hazardousInput),
                 description: data.fourthInput,
                 picture: data.thirdInput
