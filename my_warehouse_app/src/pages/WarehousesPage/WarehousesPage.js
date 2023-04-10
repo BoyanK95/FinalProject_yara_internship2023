@@ -1,22 +1,35 @@
-import { useState } from 'react';
 import WarehousesCard from '../../components/WarehousesCard/WarehousesCard';
 import Button from 'react-bootstrap/Button';
-import useHttp from '../../hooks/use-http';
 import Content from '../../components/Content/Content';
-import classes from './WarehousesPage.module.css';
+import Modal from '../../components/Modal/Modal';
+import Card from 'react-bootstrap/Card';
+import CustomForm from '../../components/Form/CustomForm';
 import { BlockSpiner } from '../../components/LoadingSpiner/BlocksSpiner';
+import useHttp from '../../hooks/use-http';
+import { useState } from 'react';
+import classes from './WarehousesPage.module.css';
+import AddItemForm from '../../components/Form/AddItemForm/AddItemForm';
 
 function WarehousesPage() {
     const [warehousesAreVisible, setWarehousesAreVisible] = useState(false);
+    const [isAddingWarehouse, setIsAddingWarehouse] = useState(false);
     const { data, error, isLoading } = useHttp('http://localhost:3001/warehouses', 'GET', null, 1000);
 
-    let btnText = 'Show Warehouses';
+    let warehouseVisibilityBtn = 'Show Warehouses';
     if (warehousesAreVisible) {
-        btnText = 'Close Warehouses';
+        warehouseVisibilityBtn = 'Close Warehouses';
     }
 
-    function productsAreVisibleToggler() {
+    function warehousesAreVisibleToggler() {
         setWarehousesAreVisible(!warehousesAreVisible);
+    }
+
+    function showAddWarehouseHandler() {
+        setIsAddingWarehouse(true);
+    }
+
+    function addWarehouseHandler(data) {
+        console.log(data);
     }
 
     console.log(data);
@@ -69,9 +82,33 @@ function WarehousesPage() {
                     {data && data.length === 0 && !isLoading && !error && <h4>There are no products to display!</h4>}
                 </div>
             )}
-            <Button className={classes.button} onClick={productsAreVisibleToggler}>
-                {btnText}
-            </Button>
+            <Modal>
+                <Card className={classes.addItemCard}>
+                    <Card.Body>
+                        <div>
+                            <h3 style={{textAlign: 'center'}}>Add Warehouse</h3>
+                            <AddItemForm
+                                onSubmit={addWarehouseHandler}
+                                firstLabel='Storage Name'
+                                secondLabel='Location'
+                                thirdLabel='Storage'
+                                fourthLabel='Picture'
+                                fifthLabel='Description'
+                                hazardousLabel='Hazardous'
+                                goTo='warehouses'
+                            />
+                        </div>
+                    </Card.Body>
+                </Card>
+            </Modal>
+            <div>
+                <Button className={classes.button} onClick={warehousesAreVisibleToggler}>
+                    {warehouseVisibilityBtn}
+                </Button>
+                <Button variant='success' onClick={showAddWarehouseHandler}>
+                    Add Warehouse
+                </Button>
+            </div>
         </div>
     );
 }

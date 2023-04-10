@@ -1,0 +1,77 @@
+label{
+    margin: 1rem;
+}
+
+.form {
+    padding: 2rem;
+    text-align: center;
+    animation: animate-in 1s ease-out forwards;
+}
+
+.form h2 {
+    padding: 1rem;
+    color: rgb(6, 6, 74);
+    margin-bottom: 1rem;
+}
+
+.container {
+    margin-bottom: 2rem;
+    /* padding: 0.3rem; */
+}
+
+input {
+    border-radius: 7px;
+    border: none;
+    margin-left: 1rem;
+    padding: 0.25rem 2rem;
+}
+
+.btnContainer {
+    padding: 0rem;
+}
+
+.btnContainer button {
+    margin: 1rem;
+    padding: 0.5rem 1.5rem;
+    
+}
+
+.input {
+    border: 1px solid darkgray;
+}
+
+.error {
+    border: 1px solid red;
+    background-color: rgba(254, 172, 172, 0.597);
+}
+
+.errorText {
+    color: red;
+    font-size: 15px;
+}
+
+.button {
+    margin: 1rem;
+}
+
+:disabled {
+    background-color: darkgray;
+    border: 1px solid rgb(108, 105, 105);
+}
+
+.disabled:hover {
+    background-color: rgb(138, 137, 137);
+    border: 1px solid rgb(108, 105, 105);
+    cursor: not-allowed;
+}
+
+@keyframes animate-in {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,20 +1,20 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import useInput from '../../hooks/use-input';
-import classes from './Form.module.css';
-import isNotEmpty from '../../hooks/isNotEmpty';
+import useInput from '../../../hooks/use-input';
+import classes from './AddItemForm.module.css'
+import isNotEmpty from '../../../hooks/isNotEmpty';
 import { useHistory } from 'react-router-dom';
 
-const CustomForm = (props) => {
+const AddItemForm = (props) => {
     const history = useHistory();
 
     const {
-        value: firstInput,
-        isValid: firstInputIsValid,
-        hasError: firstInputHasError,
-        valueChangeHandler: firstInputHandler,
-        inputBlurHandler: firstInputBlurHandler,
-        reset: resetFirstInput
+        value: name,
+        isValid: nameInputIsValid,
+        hasError: nameInputHasError,
+        valueChangeHandler: nameInputHandler,
+        inputBlurHandler: nameInputBlurHandler,
+        reset: resetNameInput
     } = useInput(isNotEmpty);
 
     const {
@@ -53,10 +53,19 @@ const CustomForm = (props) => {
         reset: resetFifthInput
     } = useInput(isNotEmpty);
 
+    const {
+        value: hazardousInput,
+        // isValid: fifthInputIsValid,
+        hasError: hazardousInputHasError,
+        valueChangeHandler: hazardousInputHandler,
+        inputBlurHandler: hazardousInputBlurHandler,
+        reset: resetHazardousInput
+    } = useInput(isNotEmpty);
+
     let formIsValid = false;
     // console.log(formIsValid);
 
-    if (firstInputIsValid && secondInputIsValid && thirdInputIsValid) {
+    if (nameInputIsValid && secondInputIsValid && thirdInputIsValid) {
         formIsValid = true;
     }
 
@@ -66,67 +75,65 @@ const CustomForm = (props) => {
         if (!formIsValid) {
             return;
         }
-        if (fourthInput) {
-            if (fourthInput !== thirdInput) {
-                return alert("Passwords don't match!");
-            }
-        }
         console.log('SIBMITED');
-        // console.log(firstInput);
+        // console.log(name);
         // console.log(secondInput);
         // console.log(thirdInput);
         // console.log(fourthInput);
         // console.log(fifthInput);
 
         props.onSubmit({
-            firstInput,
+            name,
             secondInput,
             thirdInput,
             fourthInput,
-            fifthInput
+            fifthInput,
+            hazardousInput
         });
 
         resetHandler();
     }
 
     function resetHandler() {
-        resetFirstInput();
+        resetNameInput();
         resetSecondInput();
         resetThirdInput();
         resetFourthInput();
         resetFifthInput();
+        resetHazardousInput()
 
-        history.push('/');
+        history.push(`/${props.goTo}`);
     }
 
-    const firsthInputClass = !firstInputHasError ? classes.input : classes.error;
+    const firsthInputClass = !nameInputHasError ? classes.input : classes.error;
     const secondInputClass = !secondInputHasError ? classes.input : classes.error;
     const thirdhInputClass = !thirdInputHasError ? classes.input : classes.error;
     const fourthInputClass = !fourthInputHasError ? classes.input : classes.error;
     const fifthInputClass = !fifthInputHasError ? classes.input : classes.error;
+    const hazardousInputClass = !fifthInputHasError ? classes.input : classes.error;
 
     return (
         <>
             <Form className={classes.form} onSubmit={formSubmitHandler}>
                 <div>
                     <div className={classes.container}>
-                        <label htmlFor='firstInput'>{props.firstLabel}</label>
+                        <label htmlFor='name'>{props.firstLabel}</label>
                         <input
                             className={firsthInputClass}
                             type='text'
-                            name='firstInput'
-                            id='firstInput'
-                            onBlur={firstInputBlurHandler}
-                            onChange={firstInputHandler}
-                            value={firstInput}
+                            name='name'
+                            id='name'
+                            onBlur={nameInputBlurHandler}
+                            onChange={nameInputHandler}
+                            value={name}
                         />
-                        {firstInputHasError && (
+                        {nameInputHasError && (
                             <p className={classes.errorText}>Value of {props.firstLabel} is required!</p>
                         )}
                     </div>
                 </div>
                 <div className={classes.container}>
-                    <label htmlFor={props.secondLabel}>{props.secondLabel}</label>
+                    <label htmlFor='calendar-name'>{props.secondLabel}</label>
                     <input
                         className={secondInputClass}
                         type='text'
@@ -140,7 +147,7 @@ const CustomForm = (props) => {
                     )}
                 </div>
                 <div className={classes.container}>
-                    <label htmlFor={props.thirdLabel}>{props.thirdLabel}</label>
+                    <label htmlFor='variety'>{props.thirdLabel}</label>
                     <input
                         className={thirdhInputClass}
                         type='password'
@@ -186,6 +193,25 @@ const CustomForm = (props) => {
                         )}
                     </div>
                 )}
+                {props.hazardousLabel && (
+                    <div className={classes.container}>
+                        <label htmlFor='hazardous'>{props.hazardousLabel}</label>
+                        <select
+                            className={hazardousInputClass}
+                            name='hazardous' // add name attribute to select element
+                            onBlur={hazardousInputBlurHandler}
+                            onChange={hazardousInputHandler}
+                            value={hazardousInput}
+                        >
+                            <option value=''>Select</option>
+                            <option value='true'>Yes</option>
+                            <option value='false'>No</option>
+                        </select>
+                        {hazardousInputHasError && (
+                            <p className={classes.errorText}>Value of {props.hazardousLabel} is required!</p>
+                        )}
+                    </div>
+                )}
 
                 <div className={classes.btnContainer}>
                     <Button className={classes.button} variant='danger' type='button' onClick={resetHandler}>
@@ -201,4 +227,4 @@ const CustomForm = (props) => {
     );
 };
 
-export default CustomForm;
+export default AddItemForm;
