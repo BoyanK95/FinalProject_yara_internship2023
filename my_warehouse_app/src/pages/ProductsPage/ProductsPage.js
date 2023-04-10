@@ -8,7 +8,10 @@ import { BlockSpiner } from '../../components/LoadingSpiner/BlocksSpiner';
 import useHttp from '../../hooks/use-http';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios'
 import classes from './ProductPage.module.css';
+import { translateStringToNumber } from '../../hooks/translateStringToNumber';
+import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
 // import ItemComponent from '../../components/ItemComponent/ItemComponent';
 
 function ProductsPage() {
@@ -30,10 +33,26 @@ function ProductsPage() {
         setIsAddingProduct(!isAddingProduct);
     }
 
-    function addWarehouseHandler(data) {
+    function addProductHandler(data) {
         console.log(data);
-        history.push('/warehouses');
-        setIsAddingProduct(false);
+        axios
+            .post('http://localhost:3001/warehouses', {
+                name: data.name,
+                unit: data.secondInput,
+                quantity: translateStringToNumber(data.numberInput),
+                hazardous: translateStringToBoolean(data.hazardousInput),
+                description: data.fourthInput,
+                picture: data.thirdInput
+            })
+            .then((response) => {
+                console.log(response.data);
+                setIsAddingProduct(false);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        history.push('/products');
+        // setIsAddingProduct(false);
     }
 
     console.log(data);
@@ -86,16 +105,16 @@ function ProductsPage() {
                     <Card className={classes.addItemCard}>
                         <Card.Body>
                             <div>
-                                <h3 style={{ textAlign: 'center' }}>Add Warehouse</h3>
+                                <h3 style={{ textAlign: 'center' }}>Add Product:</h3>
                                 <AddItemForm
-                                    onSubmit={addWarehouseHandler}
+                                    onSubmit={addProductHandler}
                                     firstLabel='Product Name'
                                     secondLabel='Unit Of Measure'
                                     thirdLabel='Picture*'
                                     fourthLabel='Description*'
                                     numberLabel='Quantity'
                                     hazardousLabel='Hazardous'
-                                    goTo='warehouses'
+                                    goTo='products'
                                 />
                             </div>
                         </Card.Body>

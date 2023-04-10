@@ -59,7 +59,7 @@ function WarehousesPage() {
                 console.log(error);
             });
         history.push('/warehouses');
-        setIsAddingWarehouse(false);
+        // setIsAddingWarehouse(false);
     }
 
     console.log(data);
