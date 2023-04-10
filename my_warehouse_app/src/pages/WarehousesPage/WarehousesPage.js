@@ -1,4 +1,5 @@
 import WarehousesCard from '../../components/WarehousesCard/WarehousesCard';
+import AddItemForm from '../../components/Form/AddItemForm/AddItemForm';
 import Button from 'react-bootstrap/Button';
 import Content from '../../components/Content/Content';
 import Modal from '../../components/Modal/Modal';
@@ -7,14 +8,14 @@ import { BlockSpiner } from '../../components/LoadingSpiner/BlocksSpiner';
 import useHttp from '../../hooks/use-http';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 import classes from './WarehousesPage.module.css';
-import AddItemForm from '../../components/Form/AddItemForm/AddItemForm';
 
 function WarehousesPage() {
     const [warehousesAreVisible, setWarehousesAreVisible] = useState(false);
     const [isAddingWarehouse, setIsAddingWarehouse] = useState(false);
     const { data, error, isLoading } = useHttp('http://localhost:3001/warehouses', 'GET', null, 1000);
-    const history = useHistory()
+    const history = useHistory();
 
     let warehouseVisibilityBtn = 'Show Warehouses';
     if (warehousesAreVisible) {
@@ -29,10 +30,30 @@ function WarehousesPage() {
         setIsAddingWarehouse(!isAddingWarehouse);
     }
 
+    function translateStringToBoolean(str) {
+       return str = 'true' ? true : false
+    }
+
     function addWarehouseHandler(data) {
         console.log(data);
-        history.push('/warehouses')
-        setIsAddingWarehouse(false)
+        axios
+            .post('http://localhost:3001/warehouses', {
+                name: data.firstInputValue,
+                location: data.secondInput,
+                storage: data.numberInput,
+                hazardous: translateStringToBoolean(data.hazardousInput),
+                description: data.fourthInput,
+                picture: data.thirdInput
+            })
+            .then((response) => {
+                console.log(response.data);
+                setIsAddingWarehouse(false);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        history.push('/warehouses');
+        setIsAddingWarehouse(false);
     }
 
     console.log(data);
