@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import classes from './Warehouses.module.css';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
 // import axios from 'axios';
 import { displayDateHandler } from '../../hooks/displayDateHandler';
+import classes from './Warehouses.module.css';
 
 function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, location, storage, createdAt, updatedAt }) {
     const [showDetails, setShowDetails] = useState(false);
@@ -38,8 +38,8 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
 
     return (
         <Card className={classes.card}>
-            {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img src={image} alt={title} />}
-            <Card.Body>
+            {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img className={classes.warehouseImg} src={image} alt={title} />}
+            <Card.Body className={classes.cardBody}>
                 <Card.Title>{title}</Card.Title>
                 {children && <Card.Text>{children}</Card.Text>}
                 {!children && <p>There is no description for this item!</p>}
@@ -50,9 +50,9 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
             </Card.Body>
             {showDetails && (
                 <Modal onClose={detailsToggleHandler}>
-                    {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img src={image} alt={title} />}
+                    {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img className={classes.warehouseImg} src={image} alt={title} />}
                     <Card>
-                        <Card.Body className='centered'>
+                        <Card.Body>
                             <Card.Title>{title}</Card.Title>
                             <br />
                             <Card.Text className={classes.storage}>Storage: {storage} capacity</Card.Text>

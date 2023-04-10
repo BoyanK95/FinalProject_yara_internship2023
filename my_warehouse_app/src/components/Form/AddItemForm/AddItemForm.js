@@ -28,7 +28,7 @@ const AddItemForm = (props) => {
 
     const {
         value: thirdInput,
-        isValid: thirdInputIsValid,
+        // isValid: thirdInputIsValid,
         hasError: thirdInputHasError,
         valueChangeHandler: thirdInputHandler,
         inputBlurHandler: thirdInputBlurHandler,

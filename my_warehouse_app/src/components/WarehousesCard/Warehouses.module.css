@@ -1,10 +1,17 @@
 .card {
-    width: 18rem;
+    width: 100%;
     background-image: linear-gradient(to right, rgb(208, 227, 236), rgb(161, 173, 224));
     scroll-snap-align: start;
-    margin-right: 1rem;
+}
+
+.cardBody{
+    height: 17rem;
+    width: 20rem;
+}
+
+.warehouseImg{
+    /* height: 20rem; */
     width: 100%;
-    /* padding: 1rem 4rem; */
 }
 
 .dateContainer p {

@@ -10,6 +10,8 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import classes from './WarehousesPage.module.css';
+import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
+import { translateStringToNumber } from '../../hooks/translateStringToNumber';
 
 function WarehousesPage() {
     const [warehousesAreVisible, setWarehousesAreVisible] = useState(false);
@@ -29,15 +31,7 @@ function WarehousesPage() {
     function showAddWarehouseToggler() {
         setIsAddingWarehouse(!isAddingWarehouse);
     }
-
-    function translateStringToBoolean(str) {
-        return (str = 'true' ? true : false);
-    }
-
-    function translateStringToNumber(str) {
-        return Number(str);
-    }
-
+    
     function addWarehouseHandler(data) {
         // console.log(data);
         // console.log({
