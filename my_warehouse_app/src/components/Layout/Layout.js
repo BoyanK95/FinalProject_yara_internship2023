@@ -1,17 +1,25 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import SideNavbar from './SideNavBar/SideNavBar';
 import TopHeader from './TopHeader/TopHeader';
 import classes from './Layout.module.css';
 import { useState } from 'react';
+import AuthCtx from '../../context/authCtx';
 
 const Layout = ({ children }) => {
     const [sideBarIsVisible, setSideBarIsVisible] = useState(false);
+    const ctx = useContext(AuthCtx)
 
     function toggleSideBarVisibleHandler() {
-        setSideBarIsVisible(!sideBarIsVisible);
+        if (ctx.isLoggedIn) {
+            setSideBarIsVisible(!sideBarIsVisible);
+        } else {
+            setSideBarIsVisible(false)
+        }
     }
     function showSideBarVisibleHandler() {
-        setSideBarIsVisible(true);
+        if (ctx.isLoggedIn) {
+            setSideBarIsVisible(true);
+        }
     }
 
     return (

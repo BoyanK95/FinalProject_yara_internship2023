@@ -18,9 +18,6 @@ function LoginPage() {
         setIsLoggedIn(true);
     }
 
-    function logoutHandler() {
-        setIsLoggedIn(false);
-    }
     
     return (
         <div className='centered'>

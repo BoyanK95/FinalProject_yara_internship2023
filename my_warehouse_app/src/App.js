@@ -9,11 +9,19 @@ import Layout from './components/Layout/Layout';
 import AuthCtx from './context/authCtx';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 
 function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(AuthCtx.isLoggedIn);
+
+    function logoutHandler() {
+        console.log('User has logged out!');
+        setIsLoggedIn(false);
+    }
+
     return (
-        <AuthCtx.Provider value={{isLoggedIn: false}}>
-            <Layout>
+        <AuthCtx.Provider value={{ isLoggedIn: false, onLogout: logoutHandler }}>
+            <Layout onLogout={logoutHandler}>
                 <Switch>
                     <Route path='/' exact>
                         <HomePage />

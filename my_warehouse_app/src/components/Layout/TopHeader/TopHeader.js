@@ -8,9 +8,8 @@ import AuthCtx from '../../../context/authCtx';
 
 
 const TopHeader = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(AuthCtx)
     const ctx = useContext(AuthCtx)
-    
+    console.log(ctx);
 
     const history = useHistory()
 
@@ -18,17 +17,13 @@ const TopHeader = (props) => {
         history.push('/register')
     }
 
-    function logOutHandler() {
-        console.log('User has logged out!');
-        setIsLoggedIn(false)
-    }
     
     return (
         <header>
             <div className={classes.background}>
                 <LogoImg />
                 <h1>Warehouse React App</h1>
-                {ctx.isLoggedIn ? <Button className={classes.mainNavBtn} onClick={logOutHandler} >Log out</Button> : <Button className={classes.mainNavBtn} onClick={navigateRegister}>Register</Button>}
+                {ctx.isLoggedIn ? <Button className={classes.mainNavBtn} onClick={ctx.onLogout} >Log out</Button> : <Button className={classes.mainNavBtn} onClick={navigateRegister}>Register</Button>}
             </div>
         </header>
     );
