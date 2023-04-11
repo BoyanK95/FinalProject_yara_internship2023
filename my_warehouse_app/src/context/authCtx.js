@@ -1,7 +1,8 @@
 import React from 'react';
 
 const AuthCtx = React.createContext({
-    isLoggedIn: false
+    isLoggedIn: false,
+    onLogout: () => {}
 });
 
 export default AuthCtx;

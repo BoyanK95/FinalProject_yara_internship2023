@@ -5,7 +5,7 @@ import classes from './Layout.module.css';
 import { useState } from 'react';
 import AuthCtx from '../../context/authCtx';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, onLogout }) => {
     const [sideBarIsVisible, setSideBarIsVisible] = useState(false);
     const ctx = useContext(AuthCtx)
 

@@ -1,23 +1,6 @@
-import { useState, useEffect } from 'react';
 import CustomForm from '../../components/Form/CustomForm';
 
-function LoginPage() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    useEffect(() => {
-        const storedUserInfo = localStorage.getItem('isLoggedIn');
-
-        if (storedUserInfo === '1') {
-            setIsLoggedIn(true);
-        }
-    }, []);
-
-    function loginHandler(formData) {
-        console.log(formData);
-        localStorage.setItem('isLoggedIn', '1');
-        setIsLoggedIn(true);
-    }
-
+function LoginPage(props) {    
     
     return (
         <div className='centered'>
@@ -26,7 +9,7 @@ function LoginPage() {
             </div>
             <div>
                 <CustomForm
-                    onSubmit={loginHandler}
+                    onSubmit={props.loginHandler}
                     firstLabel='E-mail@'
                     secondLabel='Username'
                     thirdLabel='Password:'
