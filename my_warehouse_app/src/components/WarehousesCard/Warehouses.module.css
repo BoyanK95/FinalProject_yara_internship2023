@@ -4,6 +4,12 @@
     scroll-snap-align: start;
 }
 
+.card:hover {
+    box-shadow: 7px 7px 15px rgba(0, 0, 0, .8);
+    border: 3px solid rgb(0, 0, 108);
+    padding: 0.5rem;
+}
+
 .cardBody{
     height: 17rem;
     width: 20rem;

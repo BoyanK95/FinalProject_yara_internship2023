@@ -1,13 +1,18 @@
 .card {
-    width: 18rem;
+    width: 100%;
     background-image: linear-gradient(to right, rgb(210, 228, 236), rgb(161, 181, 224));
+}
+
+.card:hover {
+    box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.8);
+    border: 3px solid rgb(0, 0, 108);
 }
 
 .hazardous {
     border: 5px solid red;
 }
 
-.normal{
+.normal {
     border: 3px solid darkgray;
 }
 
@@ -17,11 +22,11 @@
     color: rgb(94, 120, 153);
 }
 
-.quantity{
+.quantity {
     font-weight: 800;
     color: rgb(1, 1, 118);
 }
 
-.btnContainer{
+.btnContainer {
     display: flex;
 }
