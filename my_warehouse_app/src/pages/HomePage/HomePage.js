@@ -30,7 +30,7 @@ function HomePage() {
             <div className={classes.featuresContainer}>
                 <div className={classes.features}>
                     <h2 className='title'>Features</h2>
-                    <BsFillClipboardDataFill size={40} />
+                    <BsFillClipboardDataFill color='darkblue' size={40} />
                 </div>
                 <ul>
                     <li>
@@ -47,7 +47,7 @@ function HomePage() {
             <br></br>
             <div className={classes.features}>
                 <h2 className='title'>Why Choose Us</h2>
-                <BsFillEmojiSunglassesFill size={40} />
+                <BsFillEmojiSunglassesFill color='brown' size={40} />
             </div>
             <p>
                 Our inventory tracking system is designed to meet the specific needs of customers who require a robust

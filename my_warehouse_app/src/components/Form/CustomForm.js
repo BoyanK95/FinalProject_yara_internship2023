@@ -4,6 +4,7 @@ import useInput from '../../hooks/use-input';
 import classes from './Form.module.css';
 import isNotEmpty from '../../hooks/isNotEmpty';
 import { useHistory } from 'react-router-dom';
+import { passwordValidator } from '../../hooks/passwordValidator';
 
 const CustomForm = (props) => {
     const history = useHistory();
@@ -66,27 +67,36 @@ const CustomForm = (props) => {
         if (!formIsValid) {
             return;
         }
-        if (fourthInput) {
-            if (fourthInput !== thirdInput) {
-                return alert("Passwords don't match!");
-            }
+        const passwordsCheck = passwordValidator(thirdInput, fourthInput);
+        // if (fourthInput) {
+        //     if (fourthInput !== thirdInput) {
+        //         return alert("Passwords don't match!");
+        //     }
+        //     if (thirdInput.length <= 5 ) {
+        //         return alert('Password must be at least 5 digits long')
+        //     }
+        // }
+        console.log(passwordsCheck);
+        if (passwordsCheck) {
+            console.log('SIBMITED');
+            // console.log(firstInput);
+            // console.log(secondInput);
+            // console.log(thirdInput);
+            // console.log(fourthInput);
+            // console.log(fifthInput);
+
+            props.onSubmit({
+                firstInput,
+                secondInput,
+                thirdInput,
+                fourthInput,
+                fifthInput
+            });
+
+            resetHandler();
+        } else {
+            formIsValid = false
         }
-        console.log('SIBMITED');
-        // console.log(firstInput);
-        // console.log(secondInput);
-        // console.log(thirdInput);
-        // console.log(fourthInput);
-        // console.log(fifthInput);
-
-        props.onSubmit({
-            firstInput,
-            secondInput,
-            thirdInput,
-            fourthInput,
-            fifthInput
-        });
-
-        resetHandler();
     }
 
     function resetHandler() {
