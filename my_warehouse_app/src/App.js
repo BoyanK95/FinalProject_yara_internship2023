@@ -10,6 +10,7 @@ import AuthCtx from './context/authCtx';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
+import NotLoggedInPage from './pages/NotLogedInPage/NotLoggedInPage';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(AuthCtx.isLoggedIn);
@@ -42,10 +43,10 @@ function App() {
                         <HomePage />
                     </Route>
                     <Route path='/products'>
-                        <ProductsPage />
+                      {isLoggedIn ?  <ProductsPage /> : <NotLoggedInPage />}
                     </Route>
                     <Route path='/warehouses'>
-                        <WarehousesPage />
+                        {isLoggedIn ?<WarehousesPage /> : <NotLoggedInPage />}
                     </Route>
                     <Route path='/register'>
                         <RegistrationPage />
