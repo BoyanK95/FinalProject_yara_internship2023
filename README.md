@@ -5,3 +5,6 @@ You can see the current schema for the backend API here:
 
 
 https://github.com/BoyanK95/FinalProject_yara_internship2023/blob/main/warehouseAppDB.png
+
+
+![Database schema](https://github.com/BoyanK95/FinalProject_yara_internship2023/blob/main/warehouseAppDB.png)
