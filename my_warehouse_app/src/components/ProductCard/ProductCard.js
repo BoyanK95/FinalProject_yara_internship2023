@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Modal from '../Modal/Modal';
 import { displayDateHandler } from '../../hooks/displayDateHandler';
 
-function ProductCard({ children, title, image, hazardous, unit, quantity, createdAt, updatedAt, backUpSrc }) {
+function ProductCard({id, children, title, image, hazardous, unit, quantity, createdAt, updatedAt, backUpSrc }) {
     const [showDetails, setShowDetails] = useState(false);
 
     function detailsToggleHandler() {
@@ -15,7 +15,24 @@ function ProductCard({ children, title, image, hazardous, unit, quantity, create
     function editHandler() {}
 
     function deleteProductHandler() {
-
+        const confirmDelete = window.confirm(`Are you sure you want to delete the product with title: ${title}?`);
+        if (confirmDelete) {
+            return fetch(`http://localhost:3001/products/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .catch((error) => {
+                    console.error('There was a problem with the DELETE request:', error);
+                });
+        }
     }
 
     return (

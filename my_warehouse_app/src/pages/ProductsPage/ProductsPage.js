@@ -78,6 +78,7 @@ function ProductsPage() {
                                     return (
                                         <div className={classes.product} key={product.id}>
                                             <ProductCard
+                                                id={product.id}
                                                 image={product.picture}
                                                 title={product.name}
                                                 hazardous={product.hazardous}
