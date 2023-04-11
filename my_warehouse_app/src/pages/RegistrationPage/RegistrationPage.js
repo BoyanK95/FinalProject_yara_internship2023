@@ -23,7 +23,7 @@ function RegistrationPage() {
                 secondLabel='Username'
                 thirdLabel='Password'
                 fourthLabel='Confirm-Password'
-                fifthLabel='Country'
+                // fifthLabel='Country'
             />
             </div>
             <div>
