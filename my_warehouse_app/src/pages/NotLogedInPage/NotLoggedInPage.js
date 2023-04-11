@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom';
+import './NotLoggedInPage.module.css'
 
 const NotLoggedInPage = () => {
     const history = useHistory();

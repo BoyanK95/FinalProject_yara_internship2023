@@ -6,60 +6,33 @@ import ProductsPage from './pages/ProductsPage/ProductsPage';
 import WarehousesPage from './pages/WarehousesPage/WarehousesPage';
 import NotFound from './pages/NotFoundPage/NotFoundPage';
 import Layout from './components/Layout/Layout';
-import AuthCtx from './context/authCtx';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
 import NotLoggedInPage from './pages/NotLogedInPage/NotLoggedInPage';
+import { useContext } from 'react';
+import AuthCtx from './context/authCtx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(AuthCtx.isLoggedIn);
-
-    useEffect(() => {
-        const storedUserInfo = localStorage.getItem('isLoggedIn');
-
-        if (storedUserInfo === '1') {
-            setIsLoggedIn(true);
-        }
-    }, []);
-
-    function loginHandler(formData) {
-        console.log(formData);
-        localStorage.setItem('isLoggedIn', '1');
-        setIsLoggedIn(true);
-    }
-
-    function logoutHandler() {
-        console.log('User has logged out!');
-        localStorage.removeItem('isLoggedIn');
-        setIsLoggedIn(false);
-    }
-
+    const ctx = useContext(AuthCtx)
     return (
-        <AuthCtx.Provider value={{ isLoggedIn: isLoggedIn, onLogout: logoutHandler }}>
-            <Layout>
-                <Switch>
-                    <Route path='/' exact>
-                        <HomePage />
-                    </Route>
-                    <Route path='/products'>
-                      {isLoggedIn ?  <ProductsPage /> : <NotLoggedInPage />}
-                    </Route>
-                    <Route path='/warehouses'>
-                        {isLoggedIn ?<WarehousesPage /> : <NotLoggedInPage />}
-                    </Route>
-                    <Route path='/register'>
-                        <RegistrationPage />
-                    </Route>
-                    <Route path='/login'>
-                        <LoginPage loginHandler={loginHandler} />
-                    </Route>
-                    <Route path='*'>
-                        <NotFound />
-                    </Route>
-                </Switch>
-            </Layout>
-        </AuthCtx.Provider>
+        <Layout>
+            <Switch>
+                <Route path='/' exact>
+                    <HomePage />
+                </Route>
+                <Route path='/products'>{ctx.isLoggedIn ? <ProductsPage /> : <NotLoggedInPage />}</Route>
+                <Route path='/warehouses'>{ctx.isLoggedIn ? <WarehousesPage /> : <NotLoggedInPage />}</Route>
+                <Route path='/register'>
+                    <RegistrationPage />
+                </Route>
+                <Route path='/login'>
+                    <LoginPage loginHandler={ctx.onLogin} />
+                </Route>
+                <Route path='*'>
+                    <NotFound />
+                </Route>
+            </Switch>
+        </Layout>
     );
 }
 
