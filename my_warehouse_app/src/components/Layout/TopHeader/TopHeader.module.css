@@ -3,6 +3,14 @@
     height: 5rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.mainNavBtn{
+    margin: 1rem;
+    padding: 0.5rem 1rem;
 }
 
 h1 {

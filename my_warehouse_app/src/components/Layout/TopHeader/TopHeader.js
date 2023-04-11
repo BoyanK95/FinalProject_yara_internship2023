@@ -14,13 +14,17 @@ const TopHeader = (props) => {
     function navigateRegister() {
         history.push('/register')
     }
+
+    function logOutHandler(params) {
+        console.log('User has logged out!');
+    }
     
     return (
         <header>
             <div className={classes.background}>
                 <LogoImg />
                 <h1>Warehouse React App</h1>
-                {isLoggedIn ? <Button>Log out</Button> : <Button onClick={navigateRegister}>Register</Button>}
+                {isLoggedIn ? <Button className={classes.mainNavBtn} onClick={logOutHandler} >Log out</Button> : <Button className={classes.mainNavBtn} onClick={navigateRegister}>Register</Button>}
             </div>
         </header>
     );
