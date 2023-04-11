@@ -17,7 +17,7 @@ import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
 function ProductsPage() {
     const [productsAreVisible, setProductsAreVisible] = useState(false);
     const [isAddingProduct, setIsAddingProduct] = useState(false);
-    const { data, error, isLoading } = useHttp('http://localhost:3001/products', 'GET', null, 1000);
+    const { data, error, isLoading } = useHttp('http://localhost:3001/products', 'GET', null, 2000);
     const history = useHistory();
 
     let btnText = 'Show Products';

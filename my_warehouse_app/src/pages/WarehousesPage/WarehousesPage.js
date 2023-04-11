@@ -9,9 +9,9 @@ import useHttp from '../../hooks/use-http';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import classes from './WarehousesPage.module.css';
 import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
 import { translateStringToNumber } from '../../hooks/translateStringToNumber';
+import classes from './WarehousesPage.module.css';
 
 function WarehousesPage() {
     const [warehousesAreVisible, setWarehousesAreVisible] = useState(false);

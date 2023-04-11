@@ -15,7 +15,7 @@ function HomePage() {
 
     return (
         <div className='centered'>
-            <h1 className='title'>Welcome to our Warehouse App!</h1>
+            <h1 className='title'>Welcome !</h1>
             <p>
                 Our system helps you manage your warehouse inventory with ease. Whether you have hazardous or
                 non-hazardous products, our solution provides a comprehensive tracking system to monitor the movement of

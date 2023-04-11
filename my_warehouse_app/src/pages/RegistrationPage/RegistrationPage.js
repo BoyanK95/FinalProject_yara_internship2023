@@ -6,7 +6,7 @@ function RegistrationPage() {
     const history = useHistory();
 
     function registrationHandler(formData) {
-        console.log(formData);
+        console.log(formData); 
     }
 
     function goToLoginPage() {
