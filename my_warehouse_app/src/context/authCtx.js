@@ -18,7 +18,7 @@ export const AuthContextProvider = ({ children }) => {
 
         if (sesionToken) {
             setIsLoggedIn(true);
-            const userData = sessionStorage.getItem('userData');
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
             setUserData(userData);
         }
     }, []);
@@ -34,10 +34,10 @@ export const AuthContextProvider = ({ children }) => {
             sessionStorage.setItem('isLoggedIn', '1');
             setIsLoggedIn(true);
             setUserData({ email: formData.firstInput, name: formData.secondInput, password: formData.thirdInput });
-            sessionStorage.setItem('userData', userData);
+            sessionStorage.setItem('userData', JSON.stringify(response.data.user));
             console.log('User has been Logged In!');
         } catch (error) {
-            window.alert(`Probably a user with these credentials already exists! ${error}.`);
+            window.alert(`Failed to log in: ${error}!`);
         }
     }
 
