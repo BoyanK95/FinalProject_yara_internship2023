@@ -3,7 +3,7 @@ This is a small stock management application consisting of several pages built w
 
 
 The Nest API is placed in the following repo: https://github.com/BoyanK95/assignment-nest-api
-I've used some external you can see them all in the package.json file of the project. Some of the more important ones are nodemon, dotenv, bcrypt, class-validator, and sequelize to set the conection with pg. Also due to the fact that the React app is set to run on port 3000, I used port 3001 for the backend. That resulted in cors error, which i fixed through cor package and a CorsMiddleware to all ports.
+I've used some external packages you can see them all in the package.json file of the project. Some of the more important ones are nodemon, dotenv, bcrypt, class-validator, and sequelize to set the conection with pg. Also due to the fact that the React app is set to run on port 3000, I used port 3001 for the backend. That resulted in cors error, which I've fixed through cor package and a CorsMiddleware to all ports.
 You can start the server using the common, npm start command or preferably nest start --watch command for dev purposes.
 
 The fronend React part of the app is located in this repo in the my_warehouse_app folder. 
