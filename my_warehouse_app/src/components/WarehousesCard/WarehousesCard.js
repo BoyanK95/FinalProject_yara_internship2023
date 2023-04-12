@@ -5,15 +5,21 @@ import Modal from '../Modal/Modal';
 // import axios from 'axios';
 import { displayDateHandler } from '../../hooks/displayDateHandler';
 import classes from './Warehouses.module.css';
+import CustomInput from '../CustomInput/CustomInput';
+import CustomTextarea from '../CustomTextarea/CustomTextarea';
 
 function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, location, storage, createdAt, updatedAt }) {
     const [showDetails, setShowDetails] = useState(false);
+    const [editMode, setEditMode] = useState(false);
 
+    console.log(editMode);
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
     }
 
-    function editHandler() {}
+    function editToggleHandler() {
+        setEditMode(!editMode);
+    }
 
     function deleteWarehouseHandler() {
         const confirmDelete = window.confirm(`Are you sure you want to delete the warehouse with title: ${title}?`);
@@ -37,7 +43,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     }
 
     return (
-        <Card className={!hazardous? classes.card : classes.hazardousCard}>
+        <Card className={!hazardous ? classes.card : classes.hazardousCard}>
             {!image ? (
                 <Card.Img variant='top' src={backUpSrc} />
             ) : (
@@ -48,7 +54,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                 {children && <Card.Text>{children}</Card.Text>}
                 {!children && <p>There is no description for this item!</p>}
                 <Card.Text>Location: {location}</Card.Text>
-                <Button variant='outline-primary' style={{fontWeight: '700'}} onClick={detailsToggleHandler}>
+                <Button variant='outline-primary' style={{ fontWeight: '700' }} onClick={detailsToggleHandler}>
                     Details
                 </Button>
             </Card.Body>
@@ -63,17 +69,28 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                         <Card.Body>
                             <Card.Title>{title}</Card.Title>
                             <br />
-                            <Card.Text className={classes.storage}>Storage: {storage} capacity</Card.Text>
-                            <Card.Text className={classes.storage}>Location: {location} </Card.Text>
-                            {children && <Card.Text>{children}</Card.Text>}
-                            {!children && <p>There is no description for this item!</p>}
-                            <div className={classes.dateContainer}>
-                                <p>Create at: {displayDateHandler(createdAt)}</p>
-                                <p>Updated at: {displayDateHandler(updatedAt)}</p>
-                            </div>
+                            {!editMode ? (
+                                <Card.Text className={classes.storage}>Storage: {storage} capacity</Card.Text>
+                            ) : (
+                                <CustomInput label={'Storage:'} type={'text'} />
+                            )}
+                            {!editMode ? (
+                                <Card.Text className={classes.storage}>Location: {location} </Card.Text>
+                            ) : (
+                                <CustomInput label={'Location:'} type={'text'} />
+                            )}
+                            {children && !editMode && <Card.Text>{children}</Card.Text>}
+                            {!children && !editMode && <p>There is no description for this item!</p>}
+                            {editMode && <CustomTextarea label={'Description'} type={'text'} />}
+                            {!editMode && (
+                                <div className={classes.dateContainer}>
+                                    <p>Create at: {displayDateHandler(createdAt)}</p>
+                                    <p>Updated at: {displayDateHandler(updatedAt)}</p>
+                                </div>
+                            )}
                             <div>
-                                <Button style={{ margin: '0.5rem' }} variant='warning' onClick={editHandler}>
-                                    Edit
+                                <Button style={{ margin: '0.5rem' }} variant='warning' onClick={editToggleHandler}>
+                                    {!editMode? 'Edit' : 'Cancel'}
                                 </Button>
                                 <Button
                                     style={{ margin: '0.5rem' }}
