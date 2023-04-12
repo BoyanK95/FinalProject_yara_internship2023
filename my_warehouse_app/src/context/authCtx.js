@@ -5,7 +5,8 @@ const AuthCtx = React.createContext({
     isLoggedIn: false,
     onLogout: () => {},
     onLogin: (formData) => {},
-    userData: {}
+    userData: {},
+    token: ''
 });
 
 export const AuthContextProvider = ({ children }) => {
@@ -13,36 +14,38 @@ export const AuthContextProvider = ({ children }) => {
     const [userData, setUserData] = useState({});
 
     useEffect(() => {
-        const storedUserInfo = localStorage.getItem('isLoggedIn');
-        const sesionToken = localStorage.getItem('token');
+        const sesionToken = sessionStorage.getItem('token');
 
         if (sesionToken) {
             setIsLoggedIn(true);
-            const userData = localStorage.getItem('userData');
+            const userData = sessionStorage.getItem('userData');
             setUserData(userData);
         }
     }, []);
 
     async function loginHandler(formData) {
         try {
-            const response = await axios.post('http://localhost:3001/auth/signup', { email: formData.firstInput, name: formData.secondInput, password: formData.thirdInput });
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('isLoggedIn', '1');
+            const response = await axios.post('http://localhost:3001/auth/signup', {
+                email: formData.firstInput,
+                name: formData.secondInput,
+                password: formData.thirdInput
+            });
+            sessionStorage.setItem('token', response.data.token);
+            sessionStorage.setItem('isLoggedIn', '1');
             setIsLoggedIn(true);
             setUserData({ email: formData.firstInput, name: formData.secondInput, password: formData.thirdInput });
-            localStorage.setItem('userData', userData)
+            sessionStorage.setItem('userData', userData);
             console.log('User has been Logged In!');
         } catch (error) {
-            window.alert(error)
+            window.alert(`Probably a user with these credentials already exists! ${error}.`);
         }
     }
-    
 
     function logoutHandler() {
         console.log('User has Logged out!');
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('userData');
-        localStorage.removeItem('token');
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('userData');
+        sessionStorage.removeItem('token');
         setIsLoggedIn(false);
     }
 
@@ -52,7 +55,8 @@ export const AuthContextProvider = ({ children }) => {
                 isLoggedIn: isLoggedIn,
                 onLogout: logoutHandler,
                 onLogin: loginHandler,
-                userData: userData
+                userData: userData,
+                token: sessionStorage.getItem('token')
             }}
         >
             {children}

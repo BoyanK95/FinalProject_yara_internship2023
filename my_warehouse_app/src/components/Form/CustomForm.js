@@ -5,9 +5,12 @@ import classes from './Form.module.css';
 import isNotEmpty from '../../hooks/isNotEmpty';
 import { useHistory } from 'react-router-dom';
 import { passwordValidator } from '../../hooks/passwordValidator';
+// import { useContext } from 'react';
+// import AuthCtx from '../../context/authCtx';
 
 const CustomForm = (props) => {
     const history = useHistory();
+    // const ctx = useContext(AuthCtx);
 
     const {
         value: firstInput,
@@ -95,7 +98,7 @@ const CustomForm = (props) => {
 
             resetHandler();
         } else {
-            formIsValid = false
+            formIsValid = false;
         }
     }
 
