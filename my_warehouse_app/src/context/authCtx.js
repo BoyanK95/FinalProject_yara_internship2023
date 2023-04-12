@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AuthCtx = React.createContext({
     isLoggedIn: false,
@@ -14,26 +14,35 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         const storedUserInfo = localStorage.getItem('isLoggedIn');
-        const userData = localStorage.getItem('userData')
+        const sesionToken = localStorage.getItem('token');
 
-        if (storedUserInfo === '1') {
+        if (sesionToken) {
             setIsLoggedIn(true);
-            setUserData(userData)
+            const userData = localStorage.getItem('userData');
+            setUserData(userData);
         }
     }, []);
 
-    function loginHandler(formData) {
-        console.log(formData);
-        localStorage.setItem('isLoggedIn', '1');
-    
-        setIsLoggedIn(true);
-        setUserData({ email: formData.firstInput, username: formData.secondInput, password: formData.thirdInput });
-        console.log('User has been Loged In!');
+    async function loginHandler(formData) {
+        try {
+            const response = await axios.post('http://localhost:3001/auth/signup', { email: formData.firstInput, name: formData.secondInput, password: formData.thirdInput });
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('isLoggedIn', '1');
+            setIsLoggedIn(true);
+            setUserData({ email: formData.firstInput, name: formData.secondInput, password: formData.thirdInput });
+            localStorage.setItem('userData', userData)
+            console.log('User has been Logged In!');
+        } catch (error) {
+            window.alert(error)
+        }
     }
+    
 
     function logoutHandler() {
         console.log('User has Logged out!');
         localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userData');
+        localStorage.removeItem('token');
         setIsLoggedIn(false);
     }
 
