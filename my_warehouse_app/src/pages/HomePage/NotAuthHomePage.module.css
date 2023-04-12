@@ -1,0 +1,12 @@
+.features {
+    display: flex;
+    text-decoration: overline;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10rem;
+}
+
+.content{
+    padding: 2rem;
+    text-align: left;
+}

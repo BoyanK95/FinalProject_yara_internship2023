@@ -1,12 +1,16 @@
 import { useHistory } from 'react-router-dom';
 import CustomForm from '../../components/Form/CustomForm';
 import './RegistrationPage.module.css';
+import { useContext } from 'react';
+import AuthCtx from '../../context/authCtx';
 
 function RegistrationPage() {
+    const ctx = useContext(AuthCtx)
     const history = useHistory();
 
     function registrationHandler(formData) {
         console.log(formData); 
+        ctx.onLogin(formData)
     }
 
     function goToLoginPage() {

@@ -4,26 +4,30 @@ import { useEffect } from 'react';
 const AuthCtx = React.createContext({
     isLoggedIn: false,
     onLogout: () => {},
-    onLogin: (formData) => {}
+    onLogin: (formData) => {},
+    userData: {}
 });
 
 export const AuthContextProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(AuthCtx.isLoggedIn);
-    const [userData, setUserData] = useState()
+    const [userData, setUserData] = useState({});
 
     useEffect(() => {
         const storedUserInfo = localStorage.getItem('isLoggedIn');
+        const userData = localStorage.getItem('userData')
 
         if (storedUserInfo === '1') {
             setIsLoggedIn(true);
+            setUserData(userData)
         }
     }, []);
 
     function loginHandler(formData) {
         console.log(formData);
         localStorage.setItem('isLoggedIn', '1');
+    
         setIsLoggedIn(true);
-        setUserData(formData)
+        setUserData({ email: formData.firstInput, username: formData.secondInput, password: formData.thirdInput });
         console.log('User has been Loged In!');
     }
 

@@ -1,8 +1,13 @@
 import { useHistory } from 'react-router-dom';
 import { BsFillClipboardDataFill, BsFillEmojiSunglassesFill } from 'react-icons/bs';
 import classes from './HomePage.module.css';
+import { useContext } from 'react';
+import AuthCtx from '../../context/authCtx';
+import NotAuthHomePage from './NotAuthHomePage'
 
 function HomePage() {
+    const ctx = useContext(AuthCtx);
+
     const history = useHistory();
 
     function goToWareHouses() {
@@ -13,9 +18,12 @@ function HomePage() {
         history.push('/products');
     }
 
+    if (!ctx.isLoggedIn) {
+        return <NotAuthHomePage />;
+    }
     return (
         <div className='centered'>
-            <h1 className='title'>Welcome !</h1>
+            <h1 className='title'>Welcome back, {ctx.userData.username}!</h1>
             <p>
                 Our system helps you manage your warehouse inventory with ease. Whether you have hazardous or
                 non-hazardous products, our solution provides a comprehensive tracking system to monitor the movement of
@@ -36,11 +44,15 @@ function HomePage() {
                     <li>
                         Track stock movement in and out of each <span onClick={goToWareHouses}>warehouse,</span>
                     </li>
-                    <li>Manage <span className='dangerous'>hazardous</span> and non-hazardous products separately,</li>
+                    <li>
+                        Manage <span className='dangerous'>hazardous</span> and non-hazardous products separately,
+                    </li>
                     <li>
                         Record <span onClick={goToProducts}>product details</span> such as amount and date,
                     </li>
-                    <li>Monitor <span onClick={goToWareHouses}>warehouse stock levels,</span></li>
+                    <li>
+                        Monitor <span onClick={goToWareHouses}>warehouse stock levels,</span>
+                    </li>
                     <li>User-friendly interface for easy inventory management!</li>
                 </ul>
             </div>
