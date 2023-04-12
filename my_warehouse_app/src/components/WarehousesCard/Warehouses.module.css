@@ -4,18 +4,29 @@
     scroll-snap-align: start;
 }
 
+.hazardousCard {
+    width: 100%;
+    background-image: linear-gradient(to right, rgb(220, 233, 239), rgb(226, 153, 148));
+    scroll-snap-align: start;
+}
+
+.hazardousCard:hover{
+    box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.8);
+    border: 3px solid rgb(150, 2, 2);
+}
+
 .card:hover {
-    box-shadow: 7px 7px 15px rgba(0, 0, 0, .8);
+    box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.8);
     border: 3px solid rgb(0, 0, 108);
     /* padding: 0.5rem; */
 }
 
-.cardBody{
+.cardBody {
     height: 17rem;
     width: 20rem;
 }
 
-.warehouseImg{
+.warehouseImg {
     /* height: 20rem; */
     width: 100%;
 }
@@ -26,7 +37,7 @@
     color: rgb(94, 120, 153);
 }
 
-.storage{
+.storage {
     font-weight: 800;
     color: rgb(1, 1, 118);
 }

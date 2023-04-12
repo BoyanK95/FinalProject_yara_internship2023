@@ -37,20 +37,28 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     }
 
     return (
-        <Card className={classes.card}>
-            {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img className={classes.warehouseImg} src={image} alt={title} />}
+        <Card className={!hazardous? classes.card : classes.hazardousCard}>
+            {!image ? (
+                <Card.Img variant='top' src={backUpSrc} />
+            ) : (
+                <img className={classes.warehouseImg} src={image} alt={title} />
+            )}
             <Card.Body className={classes.cardBody}>
                 <Card.Title>{title}</Card.Title>
                 {children && <Card.Text>{children}</Card.Text>}
                 {!children && <p>There is no description for this item!</p>}
                 <Card.Text>Location: {location}</Card.Text>
-                <Button variant='outline-primary' onClick={detailsToggleHandler}>
+                <Button variant='outline-primary' style={{fontWeight: '700'}} onClick={detailsToggleHandler}>
                     Details
                 </Button>
             </Card.Body>
             {showDetails && (
-                <Modal onClose={detailsToggleHandler}>
-                    {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img className={classes.warehouseImg} src={image} alt={title} />}
+                <Modal hazardous={hazardous} onClose={detailsToggleHandler}>
+                    {!image ? (
+                        <Card.Img variant='top' src={backUpSrc} />
+                    ) : (
+                        <img className={classes.warehouseImg} src={image} alt={title} />
+                    )}
                     <Card>
                         <Card.Body>
                             <Card.Title>{title}</Card.Title>

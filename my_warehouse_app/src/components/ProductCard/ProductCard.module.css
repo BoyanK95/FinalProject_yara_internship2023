@@ -3,6 +3,16 @@
     background-image: linear-gradient(to right, rgb(210, 228, 236), rgb(161, 181, 224));
 }
 
+.hazardousCard {
+    width: 100%;
+    background-image: linear-gradient(to right, rgb(210, 228, 236), rgb(222, 141, 141));
+}
+
+.hazardousCard:hover {
+    box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.8);
+    border: 3px solid rgb(150, 2, 2);
+}
+
 .card:hover {
     box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.8);
     border: 3px solid rgb(0, 0, 108);

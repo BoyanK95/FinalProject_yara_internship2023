@@ -11,18 +11,18 @@ const Backdrop = ({ onClose }) => {
 
 const ModalOverlay = (props) => {
     return (
-        <div open className={classes.modal}>
+        <div open className={!props.hazardous ? classes.modal : classes.hazardousModal}>
             {props.children}
         </div>
     );
 };
 
-function Modal({ onClose, onSubmit,children }) {
+function Modal({ onClose, onSubmit, children, hazardous }) {
     return (
         <Fragment>
             {ReactDOM.createPortal(<Backdrop onClose={onClose} />, backdropRootEl)}
             {ReactDOM.createPortal(
-                <ModalOverlay>
+                <ModalOverlay hazardous={hazardous}>
                     {children}
                 </ModalOverlay>,
                 modalRootEl

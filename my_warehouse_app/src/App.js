@@ -20,8 +20,8 @@ function App() {
                 <Route path='/' exact>
                     <HomePage />
                 </Route>
-                <Route path='/products'>{ctx.isLoggedIn ? <ProductsPage /> : <NotLoggedInPage />}</Route>
-                <Route path='/warehouses'>{ctx.isLoggedIn ? <WarehousesPage /> : <NotLoggedInPage />}</Route>
+                <Route path='/products'>{ctx.token ? <ProductsPage /> : <NotLoggedInPage />}</Route>
+                <Route path='/warehouses'>{ctx.token ? <WarehousesPage /> : <NotLoggedInPage />}</Route>
                 <Route path='/register'>
                     <RegistrationPage />
                 </Route>
