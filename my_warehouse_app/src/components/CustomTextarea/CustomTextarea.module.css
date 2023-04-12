@@ -1,0 +1,10 @@
+textarea {
+    border-radius: 7px;
+    padding: 1rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin: 0.4rem;
+}

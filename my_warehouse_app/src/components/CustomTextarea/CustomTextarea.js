@@ -1,8 +1,10 @@
-const CustomTextarea = ({ label, type, disabled, onChange }) => {
+import classes from './CustomTextarea.module.css'
+
+const CustomTextarea = ({ label, type, disabled, value, onChange }) => {
     return (
-        <div>
+        <div className={classes.container}>
             <label htmlFor={label}>{label}</label>
-            <textarea name={label} type={type} disabled={disabled} onChange={onChange} />
+            <textarea name={label} type={type} disabled={disabled} value={value} onChange={onChange} />
         </div>
     );
 };
