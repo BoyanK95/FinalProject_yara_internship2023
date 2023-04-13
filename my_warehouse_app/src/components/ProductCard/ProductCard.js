@@ -17,7 +17,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
 
     const [titleValue, setTitleValue] = useState(title);
     const [unitValue, setUnitValue] = useState(unit);
-    const [qtyValue, setQtyValue] = useState(unit);
+    const [qtyValue, setQtyValue] = useState(quantity);
     const [imageValue, setImageValue] = useState(backUpSrc || image || '');
     const [descriptionValue, setDescriptionValue] = useState(children || '');
     const {

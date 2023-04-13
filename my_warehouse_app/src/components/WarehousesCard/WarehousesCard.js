@@ -10,8 +10,6 @@ import CustomInput from '../CustomInput/CustomInput';
 import CustomTextarea from '../CustomTextarea/CustomTextarea';
 import { useHistory } from 'react-router-dom';
 import SelectInput from '../HazardousSelectInput/SelectInput';
-import useInput from '../../hooks/use-input';
-import isNotEmpty from '../../hooks/isNotEmpty';
 import { url } from '../../constants/url';
 import axios from 'axios';
 
@@ -47,7 +45,6 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
             hazardousInput !== hazardous
         ) {
             console.log('Storage edited');
-            console.log(translateStringToBoolean(hazardousInput));
             const updatedWarehouseData = {
                 name: titleValue,
                 picture: imageValue,
