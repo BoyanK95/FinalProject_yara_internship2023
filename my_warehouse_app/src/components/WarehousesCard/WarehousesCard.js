@@ -31,8 +31,11 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
             return window.alert('You have to fill in Location and Storage!')
         }
         if (locationValue !== location || storageValue !== storage) {
+            console.log('Storage edited');
             console.log(locationValue, storageValue, descriptionValue);
             history.push('/warehouses')
+            setEditMode(false)
+            setShowDetails(false)
         }
     }
 

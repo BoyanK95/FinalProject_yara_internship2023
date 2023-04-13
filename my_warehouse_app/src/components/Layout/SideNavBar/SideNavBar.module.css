@@ -15,7 +15,7 @@
     background-image: linear-gradient(rgb(93, 157, 200), rgb(26, 155, 131));
 }
 
-.sidebar.show {
+.sidebar.close {
     left: 0;
     animation: slide-out 0.8s ease-out forwards;
 }

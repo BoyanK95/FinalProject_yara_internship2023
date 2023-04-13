@@ -12,11 +12,12 @@ import axios from 'axios';
 import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
 import { translateStringToNumber } from '../../hooks/translateStringToNumber';
 import classes from './WarehousesPage.module.css';
+import { url } from '../../constants/url';
 
 function WarehousesPage() {
     const [warehousesAreVisible, setWarehousesAreVisible] = useState(false);
     const [isAddingWarehouse, setIsAddingWarehouse] = useState(false);
-    const { data, error, isLoading } = useHttp('http://localhost:3001/warehouses', 'GET', null, 1000);
+    const { data, error, isLoading } = useHttp(`${url}/warehouses`, 'GET', null, 2000);
     const history = useHistory();
 
     let warehouseVisibilityBtn = 'Show Warehouses';
@@ -43,7 +44,7 @@ function WarehousesPage() {
         //     picture: data.thirdInput
         // });
         axios
-            .post('http://localhost:3001/warehouses', {
+            .post(`${url}/warehouses`, {
                 name: data.name,
                 location: data.secondInput,
                 storage: translateStringToNumber(data.numberInput),

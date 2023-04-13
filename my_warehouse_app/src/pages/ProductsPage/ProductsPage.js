@@ -12,12 +12,13 @@ import axios from 'axios'
 import classes from './ProductPage.module.css';
 import { translateStringToNumber } from '../../hooks/translateStringToNumber';
 import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
+import { url } from '../../constants/url';
 // import ItemComponent from '../../components/ItemComponent/ItemComponent';
 
 function ProductsPage() {
     const [productsAreVisible, setProductsAreVisible] = useState(false);
     const [isAddingProduct, setIsAddingProduct] = useState(false);
-    const { data, error, isLoading } = useHttp('http://localhost:3001/products', 'GET', null, 2000);
+    const { data, error, isLoading } = useHttp(`${url}/products`, 'GET', null, 2000);
     const history = useHistory();
 
     let btnText = 'Show Products';
@@ -36,7 +37,7 @@ function ProductsPage() {
     function addProductHandler(data) {
         console.log(data);
         axios
-            .post('http://localhost:3001/warehouses', {
+            .post(`${url}/products`, {
                 name: data.name,
                 unit: data.secondInput,
                 quantity: translateStringToNumber(data.numberInput),
