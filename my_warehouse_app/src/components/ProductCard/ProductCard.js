@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Modal from '../Modal/Modal';
 import { displayDateHandler } from '../../hooks/displayDateHandler';
 import CustomInput from '../CustomInput/CustomInput';
+import CustomTextarea from '../CustomTextarea/CustomTextarea';
 import SelectInput from '../HazardousSelectInput/SelectInput';
 import useInput from '../../hooks/use-input';
 import isNotEmpty from '../../hooks/isNotEmpty';
@@ -18,6 +19,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
     const [unitValue, setUnitValue] = useState(unit);
     const [qtyValue, setQtyValue] = useState(unit);
     const [imageValue, setImageValue] = useState(backUpSrc || image || '');
+    const [descriptionValue, setDescriptionValue] = useState(children || '');
     const {
         value: hazardousInput,
         // isValid: hazardousInputIsValid,
@@ -131,12 +133,21 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
                                     </div>
                                 </div>
                             )}
-                            {children && <Card.Text>{children}</Card.Text>}
-                            {!children && <p>There is no description for this item!</p>}
-                            <div className={classes.dateContainer}>
-                                <p>Create at: {displayDateHandler(createdAt)}</p>
-                                <p>Updated at: {displayDateHandler(updatedAt)}</p>
-                            </div>
+                            {children && !editMode && <Card.Text>{children}</Card.Text>}
+                            {!children && !editMode && <p>There is no description for this item!</p>}
+                            {!editMode ? (
+                                <div className={classes.dateContainer}>
+                                    <p>Create at: {displayDateHandler(createdAt)}</p>
+                                    <p>Updated at: {displayDateHandler(updatedAt)}</p>
+                                </div>
+                            ) : (
+                                <CustomTextarea
+                                    label={'Description'}
+                                    type={'text'}
+                                    value={descriptionValue}
+                                    onChange={(e) => setDescriptionValue(e.target.value)}
+                                />
+                            )}
                             <div className={classes.btnContainer}>
                                 <Button style={{ margin: '0.5rem' }} variant='warning' onClick={editToggleHandler}>
                                     {!editMode ? 'Edit' : 'Cancel'}
