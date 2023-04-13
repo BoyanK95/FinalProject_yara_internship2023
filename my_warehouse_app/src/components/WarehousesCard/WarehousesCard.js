@@ -19,6 +19,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     const [titleValue, setTitleValue] = useState(title);
     const [locationValue, setLocationValue] = useState(location);
     const [storageValue, setStorageValue] = useState(storage);
+    const [imageValue, setImageValue] = useState(backUpSrc || image || '');
     const [descriptionValue, setDescriptionValue] = useState(children || '');
     const {
         value: hazardousInput,
@@ -129,8 +130,8 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                                     <CustomInput
                                         label={'Image:'}
                                         type={'text'}
-                                        value={storageValue}
-                                        onChange={(e) => setStorageValue(e.target.value)}
+                                        value={imageValue}
+                                        onChange={(e) => setImageValue(e.target.value)}
                                     />
                                 </>
                             )}

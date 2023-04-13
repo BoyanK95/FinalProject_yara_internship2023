@@ -4,18 +4,33 @@ import classes from './ProductCard.module.css';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
 import { displayDateHandler } from '../../hooks/displayDateHandler';
+import CustomInput from '../CustomInput/CustomInput';
+import SelectInput from '../HazardousSelectInput/SelectInput';
+import useInput from '../../hooks/use-input';
+import isNotEmpty from '../../hooks/isNotEmpty';
+import { url } from '../../constants/url';
 
-function ProductCard({id, children, title, image, hazardous, unit, quantity, createdAt, updatedAt, backUpSrc }) {
+function ProductCard({ id, children, title, image, hazardous, unit, quantity, createdAt, updatedAt, backUpSrc }) {
     const [showDetails, setShowDetails] = useState(false);
     const [editMode, setEditMode] = useState(false);
 
+    const [titleValue, setTitleValue] = useState(title);
+    const [imageValue, setImageValue] = useState(backUpSrc || image || '');
+    const {
+        value: hazardousInput,
+        // isValid: hazardousInputIsValid,
+        hasError: hazardousInputHasError,
+        valueChangeHandler: hazardousInputHandler,
+        inputBlurHandler: hazardousInputBlurHandler
+        // reset: resetHazardousInput
+    } = useInput(isNotEmpty);
 
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
     }
 
     function editToggleHandler() {
-        setEditMode(!editMode)
+        setEditMode(!editMode);
     }
 
     function sendEditHandler() {
@@ -25,7 +40,7 @@ function ProductCard({id, children, title, image, hazardous, unit, quantity, cre
     function deleteProductHandler() {
         const confirmDelete = window.confirm(`Are you sure you want to delete the product with title: ${title}?`);
         if (confirmDelete) {
-            return fetch(`http://localhost:3001/products/${id}`, {
+            return fetch(`${url}/products/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,14 +59,14 @@ function ProductCard({id, children, title, image, hazardous, unit, quantity, cre
     }
 
     return (
-        <Card className={!hazardous? classes.card : classes.hazardousCard}>
+        <Card className={!hazardous ? classes.card : classes.hazardousCard}>
             {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img src={image} alt={title} />}
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 {children && <Card.Text>{children}</Card.Text>}
                 {!children && <p>There is no description for this item!</p>}
                 <Card.Text></Card.Text>
-                <Button variant='outline-primary' style={{fontWeight: '700'}} onClick={detailsToggleHandler}>
+                <Button variant='outline-primary' style={{ fontWeight: '700' }} onClick={detailsToggleHandler}>
                     Details
                 </Button>
             </Card.Body>
@@ -60,8 +75,36 @@ function ProductCard({id, children, title, image, hazardous, unit, quantity, cre
                     {!image ? <Card.Img variant='top' src={backUpSrc} /> : <img src={image} alt={title} />}
                     <Card>
                         <Card.Body className='centered'>
-                            <Card.Title>{title}</Card.Title>
-                            <br />
+                            {!editMode ? (
+                                <Card.Title>{title}</Card.Title>
+                            ) : (
+                                <CustomInput
+                                    label={'Title:'}
+                                    type={'text'}
+                                    value={titleValue}
+                                    onChange={(e) => setTitleValue(e.target.value)}
+                                />
+                            )}
+                            {!editMode ? (
+                                <br />
+                            ) : (
+                                <>
+                                    <SelectInput
+                                        label={'Hazardous:'}
+                                        name={'hazardous'}
+                                        value={hazardousInput}
+                                        blurHandler={hazardousInputBlurHandler}
+                                        inputHandler={hazardousInputHandler}
+                                        hasError={hazardousInputHasError}
+                                    />
+                                    <CustomInput
+                                        label={'Image:'}
+                                        type={'text'}
+                                        value={imageValue}
+                                        onChange={(e) => setImageValue(e.target.value)}
+                                    />
+                                </>
+                            )}
                             <Card.Text className={classes.quantity}>
                                 Quantity: {quantity} / {unit}
                             </Card.Text>
