@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 import SelectInput from '../HazardousSelectInput/SelectInput';
 import useInput from '../../hooks/use-input';
 import isNotEmpty from '../../hooks/isNotEmpty';
+import { url } from '../../constants/url';
 
 function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, location, storage, createdAt, updatedAt }) {
     const [showDetails, setShowDetails] = useState(false);
@@ -42,7 +43,12 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
         if (!locationValue || !storageValue) {
             return window.alert('You have to fill in Location and Storage!');
         }
-        if (locationValue !== location || storageValue !== storage || titleValue !== title || hazardousInput !== hazardous) {
+        if (
+            locationValue !== location ||
+            storageValue !== storage ||
+            titleValue !== title ||
+            hazardousInput !== hazardous
+        ) {
             console.log('Storage edited');
             console.log(titleValue, locationValue, storageValue, descriptionValue, hazardousInput);
             history.push('/warehouses');
@@ -54,7 +60,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     function deleteWarehouseHandler() {
         const confirmDelete = window.confirm(`Are you sure you want to delete the warehouse with title: ${title}?`);
         if (confirmDelete) {
-            return fetch(`http://localhost:3001/warehouses/${id}`, {
+            return fetch(`${url}/warehouses/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -64,6 +70,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
+                    setShowDetails(false)
                     return response.json();
                 })
                 .catch((error) => {
@@ -110,21 +117,29 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                             {!editMode ? (
                                 <br />
                             ) : (
-                                <SelectInput
-                                    label={'Hazardous:'}
-                                    name={'hazardous'}
-                                    value={hazardousInput}
-                                    blurHandler={hazardousInputBlurHandler}
-                                    inputHandler={hazardousInputHandler}
-                                    hasError={hazardousInputHasError}
-                                />
+                                <>
+                                    <SelectInput
+                                        label={'Hazardous:'}
+                                        name={'hazardous'}
+                                        value={hazardousInput}
+                                        blurHandler={hazardousInputBlurHandler}
+                                        inputHandler={hazardousInputHandler}
+                                        hasError={hazardousInputHasError}
+                                    />
+                                    <CustomInput
+                                        label={'Image:'}
+                                        type={'text'}
+                                        value={storageValue}
+                                        onChange={(e) => setStorageValue(e.target.value)}
+                                    />
+                                </>
                             )}
                             {!editMode ? (
                                 <Card.Text className={classes.storage}>Storage: {storage} capacity</Card.Text>
                             ) : (
                                 <CustomInput
                                     label={'Storage:'}
-                                    type={'text'}
+                                    type={'number'}
                                     value={storageValue}
                                     onChange={(e) => setStorageValue(e.target.value)}
                                 />

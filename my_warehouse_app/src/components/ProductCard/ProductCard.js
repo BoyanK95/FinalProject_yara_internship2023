@@ -18,6 +18,10 @@ function ProductCard({id, children, title, image, hazardous, unit, quantity, cre
         setEditMode(!editMode)
     }
 
+    function sendEditHandler() {
+        console.log();
+    }
+
     function deleteProductHandler() {
         const confirmDelete = window.confirm(`Are you sure you want to delete the product with title: ${title}?`);
         if (confirmDelete) {

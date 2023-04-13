@@ -15,7 +15,7 @@ const ModalOverlay = (props) => {
         <div open className={!props.hazardous ? classes.modal : classes.hazardousModal}>
             {props.hazardous && (
                 <div>
-                    <FaBiohazard style={{ margin: '1rem' }} size={40} />
+                    <FaBiohazard style={{ margin: '0.3rem' }} size={40} />
                     <h4 style={{ fontWeight: '800' }}>Hazardous!</h4>
                 </div>
             )}

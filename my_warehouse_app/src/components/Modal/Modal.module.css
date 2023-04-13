@@ -9,8 +9,8 @@
 }
 
 .modal {
-    height: 57rem;
-    margin-top: 4rem;
+    height: 58.5rem;
+    margin-top: 2rem;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
     padding: 3rem 9rem;
     text-align: center;
@@ -22,8 +22,8 @@
 }
 
 .hazardousModal {
-    height: 57rem;
-    margin-top: 4rem;
+    height: 58.5rem;
+    margin-top: 2rem;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
     padding: 3rem 9rem;
     text-align: center;
