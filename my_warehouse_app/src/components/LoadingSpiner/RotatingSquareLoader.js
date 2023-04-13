@@ -15,3 +15,5 @@ export const RotatingSquareLoader = () => (
         />
     </>
 );
+
+export default RotatingSquareLoader
