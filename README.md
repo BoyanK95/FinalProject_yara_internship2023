@@ -11,6 +11,32 @@ The fronend React part of the app is located in this repo in the my_warehouse_ap
 You can start the app using npm start command. Normally react apps run on port 3000, but if its taken just type Y and it should forward you to the next posible port.
 
 
+Stock Management Application
+This is a small stock management application consisting of four pages built with ReactJS consuming REST API. The API calls another REST API for calculation operations, and the data is stored in PostgreSQL. The application is written in TypeScript.
+
+Screens
+Screen 1: Login and Registration
+On this screen, users can register and log in to their "space" and "data."
+
+Screen 2: Warehouse Operations
+On this screen, users can perform different warehouse operations like delete, create, or edit. They can also list all the warehouses for the specific user.
+
+Screen 3: Product Entry
+On this screen, users can quickly add products to the master products list and see a full list of the product list.
+
+Screen 4: Warehouse Stock Movement
+On this screen, users can switch between warehouses within the page. The page shows the current stock amount, free stock space remaining, and a historic list of Imports and exports. The user can also add a new import or export.
+
+Database Schema
+The database schema includes the following tables:
+
+users
+products
+warehouses
+warehouses_products
+stock_movements
+
+
 You can see the current schema for the backend API and a link to it down here:
 
 https://github.com/BoyanK95/FinalProject_yara_internship2023/blob/main/warehouseAppDB.png
