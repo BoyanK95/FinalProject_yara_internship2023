@@ -7,12 +7,16 @@ import { displayDateHandler } from '../../hooks/displayDateHandler';
 
 function ProductCard({id, children, title, image, hazardous, unit, quantity, createdAt, updatedAt, backUpSrc }) {
     const [showDetails, setShowDetails] = useState(false);
+    const [editMode, setEditMode] = useState(false);
+
 
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
     }
 
-    function editHandler() {}
+    function editToggleHandler() {
+        setEditMode(!editMode)
+    }
 
     function deleteProductHandler() {
         const confirmDelete = window.confirm(`Are you sure you want to delete the product with title: ${title}?`);
@@ -64,8 +68,8 @@ function ProductCard({id, children, title, image, hazardous, unit, quantity, cre
                                 <p>Updated at: {displayDateHandler(updatedAt)}</p>
                             </div>
                             <div className={classes.btnContainer}>
-                                <Button style={{ margin: '0.5rem' }} variant='warning' onClick={editHandler}>
-                                    Edit
+                                <Button style={{ margin: '0.5rem' }} variant='warning' onClick={editToggleHandler}>
+                                    {!editMode ? 'Edit' : 'Cancel'}
                                 </Button>
                                 <Button
                                     style={{ margin: '0.5rem' }}

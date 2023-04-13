@@ -6,17 +6,29 @@ import { displayDateHandler } from '../../hooks/displayDateHandler';
 import classes from './Warehouses.module.css';
 import CustomInput from '../CustomInput/CustomInput';
 import CustomTextarea from '../CustomTextarea/CustomTextarea';
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import SelectInput from '../HazardousSelectInput/SelectInput';
+import useInput from '../../hooks/use-input';
+import isNotEmpty from '../../hooks/isNotEmpty';
 
 function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, location, storage, createdAt, updatedAt }) {
     const [showDetails, setShowDetails] = useState(false);
     const [editMode, setEditMode] = useState(false);
 
+    const [titleValue, setTitleValue] = useState(title);
     const [locationValue, setLocationValue] = useState(location);
     const [storageValue, setStorageValue] = useState(storage);
     const [descriptionValue, setDescriptionValue] = useState(children || '');
+    const {
+        value: hazardousInput,
+        // isValid: hazardousInputIsValid,
+        hasError: hazardousInputHasError,
+        valueChangeHandler: hazardousInputHandler,
+        inputBlurHandler: hazardousInputBlurHandler
+        // reset: resetHazardousInput
+    } = useInput(isNotEmpty);
 
-    const history = useHistory()
+    const history = useHistory();
 
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
@@ -28,14 +40,14 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
 
     function sendEditHandler() {
         if (!locationValue || !storageValue) {
-            return window.alert('You have to fill in Location and Storage!')
+            return window.alert('You have to fill in Location and Storage!');
         }
-        if (locationValue !== location || storageValue !== storage) {
+        if (locationValue !== location || storageValue !== storage || titleValue !== title || hazardousInput !== hazardous) {
             console.log('Storage edited');
-            console.log(locationValue, storageValue, descriptionValue);
-            history.push('/warehouses')
-            setEditMode(false)
-            setShowDetails(false)
+            console.log(titleValue, locationValue, storageValue, descriptionValue, hazardousInput);
+            history.push('/warehouses');
+            setEditMode(false);
+            setShowDetails(false);
         }
     }
 
@@ -85,8 +97,28 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                     )}
                     <Card>
                         <Card.Body>
-                            <Card.Title>{title}</Card.Title>
-                            <br />
+                            {!editMode ? (
+                                <Card.Title>{title}</Card.Title>
+                            ) : (
+                                <CustomInput
+                                    label={'Title:'}
+                                    type={'text'}
+                                    value={titleValue}
+                                    onChange={(e) => setTitleValue(e.target.value)}
+                                />
+                            )}
+                            {!editMode ? (
+                                <br />
+                            ) : (
+                                <SelectInput
+                                    label={'Hazardous:'}
+                                    name={'hazardous'}
+                                    value={hazardousInput}
+                                    blurHandler={hazardousInputBlurHandler}
+                                    inputHandler={hazardousInputHandler}
+                                    hasError={hazardousInputHasError}
+                                />
+                            )}
                             {!editMode ? (
                                 <Card.Text className={classes.storage}>Storage: {storage} capacity</Card.Text>
                             ) : (

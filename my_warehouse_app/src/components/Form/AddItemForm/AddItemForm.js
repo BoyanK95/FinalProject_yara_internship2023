@@ -1,9 +1,10 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import useInput from '../../../hooks/use-input';
-import classes from './AddItemForm.module.css'
+import classes from './AddItemForm.module.css';
 import isNotEmpty from '../../../hooks/isNotEmpty';
 import { useHistory } from 'react-router-dom';
+import SelectInput from '../../HazardousSelectInput/SelectInput';
 
 const AddItemForm = (props) => {
     const history = useHistory();
@@ -100,7 +101,7 @@ const AddItemForm = (props) => {
         resetThirdInput();
         resetFourthInput();
         resetNumberInput();
-        resetHazardousInput()
+        resetHazardousInput();
 
         history.push(`/${props.goTo}`);
     }
@@ -157,7 +158,9 @@ const AddItemForm = (props) => {
                         value={thirdInput}
                     />
                     {thirdInputHasError && (
-                        <p className={classes.errorText}>Value of {props.thirdLabel} is not required, but good to add!</p>
+                        <p className={classes.errorText}>
+                            Value of {props.thirdLabel} is not required, but good to add!
+                        </p>
                     )}
                 </div>
                 {props.fourthLabel && (
@@ -172,7 +175,9 @@ const AddItemForm = (props) => {
                             value={fourthInput}
                         />
                         {fourthInputHasError && (
-                            <p className={classes.errorText}>Value of {props.fourthLabel} is not required, but good to add!</p>
+                            <p className={classes.errorText}>
+                                Value of {props.fourthLabel} is not required, but good to add!
+                            </p>
                         )}
                     </div>
                 )}
@@ -194,23 +199,31 @@ const AddItemForm = (props) => {
                     </div>
                 )}
                 {props.hazardousLabel && (
-                    <div className={classes.container}>
-                        <label htmlFor='hazardous'>{props.hazardousLabel}</label>
-                        <select
-                            // className={hazardousInputClass}
-                            name='hazardous'
-                            onBlur={hazardousInputBlurHandler}
-                            onChange={hazardousInputHandler}
-                            value={hazardousInput}
-                        >
-                            <option value=''>Select</option>
-                            <option value='true'>Yes</option>
-                            <option value='false'>No</option>
-                        </select>
-                        {hazardousInputHasError && (
-                            <p className={classes.errorText}>Value of {props.hazardousLabel} is required!</p>
-                        )}
-                    </div>
+                    <SelectInput
+                        label={'Hazardous:'}
+                        name={'hazardous'}
+                        value={hazardousInput}
+                        blurHandler={hazardousInputBlurHandler}
+                        inputHandler={hazardousInputHandler}
+                        hasError={hazardousInputHasError}
+                    />
+                    // <div className={classes.container}>
+                    //     <label htmlFor='hazardous'>{props.hazardousLabel}</label>
+                    //     <select
+                    //         // className={hazardousInputClass}
+                    //         name='hazardous'
+                    //         onBlur={hazardousInputBlurHandler}
+                    //         onChange={hazardousInputHandler}
+                    //         value={hazardousInput}
+                    //     >
+                    //         <option value=''>Select</option>
+                    //         <option value='true'>Yes</option>
+                    //         <option value='false'>No</option>
+                    //     </select>
+                    //     {hazardousInputHasError && (
+                    //         <p className={classes.errorText}>Value of {props.hazardousLabel} is required!</p>
+                    //     )}
+                    // </div>
                 )}
 
                 <div className={classes.btnContainer}>
