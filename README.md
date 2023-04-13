@@ -11,8 +11,6 @@ The fronend React part of the app is located in this repo in the my_warehouse_ap
 You can start the app using npm start command. Normally react apps run on port 3000, but if its taken just type Y and it should forward you to the next posible port.
 
 
-Stock Management Application
-This is a small stock management application consisting of four pages built with ReactJS consuming REST API. The API calls another REST API for calculation operations, and the data is stored in PostgreSQL. The application is written in TypeScript.
 
 Screens
 Screen 1: Login and Registration
