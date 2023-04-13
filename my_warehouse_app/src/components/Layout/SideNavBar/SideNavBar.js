@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { FaProductHunt, FaWarehouse } from 'react-icons/fa';
 import classes from './SideNavBar.module.css'
-
+import {BsReverseLayoutTextWindowReverse} from "react-icons/bs";
 const SideNavbar = () => {
     return (
         <div className={classes.sidebar}>
@@ -20,6 +20,14 @@ const SideNavbar = () => {
                             <div>
                                 <FaWarehouse size={35}/>
                                 <p>Warehouses</p>
+                            </div>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink activeClassName={classes.active} to='/movements'>
+                            <div>
+                                <BsReverseLayoutTextWindowReverse size={35}/>
+                                <p>Movements</p>
                             </div>
                         </NavLink>
                     </li>
