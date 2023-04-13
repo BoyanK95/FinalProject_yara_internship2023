@@ -37,6 +37,23 @@
     color: rgb(1, 1, 118);
 }
 
+.qtyContainer {
+    width: 25%;
+    margin: 0.3rem;
+}
+
+.unitContainer {
+    width: 25%;
+    margin: 0.3rem;
+}
+
+.sizeContainer {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+
 .btnContainer {
     display: flex;
 }

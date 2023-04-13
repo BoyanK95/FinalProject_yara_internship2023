@@ -15,6 +15,8 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
     const [editMode, setEditMode] = useState(false);
 
     const [titleValue, setTitleValue] = useState(title);
+    const [unitValue, setUnitValue] = useState(unit);
+    const [qtyValue, setQtyValue] = useState(unit);
     const [imageValue, setImageValue] = useState(backUpSrc || image || '');
     const {
         value: hazardousInput,
@@ -105,9 +107,30 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
                                     />
                                 </>
                             )}
-                            <Card.Text className={classes.quantity}>
-                                Quantity: {quantity} / {unit}
-                            </Card.Text>
+                            {!editMode ? (
+                                <Card.Text className={classes.quantity}>
+                                    Quantity: {quantity} / {unit}
+                                </Card.Text>
+                            ) : (
+                                <div className={classes.sizeContainer}>
+                                    <div className={classes.unitContainer}>
+                                        <CustomInput
+                                            label={'Unit:'}
+                                            type={'text'}
+                                            value={unitValue}
+                                            onChange={(e) => setUnitValue(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className={classes.qtyContainer}>
+                                        <CustomInput
+                                            label={'Quantity:'}
+                                            type={'number'}
+                                            value={qtyValue}
+                                            onChange={(e) => setQtyValue(e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            )}
                             {children && <Card.Text>{children}</Card.Text>}
                             {!children && <p>There is no description for this item!</p>}
                             <div className={classes.dateContainer}>
@@ -118,13 +141,23 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
                                 <Button style={{ margin: '0.5rem' }} variant='warning' onClick={editToggleHandler}>
                                     {!editMode ? 'Edit' : 'Cancel'}
                                 </Button>
-                                <Button
-                                    style={{ margin: '0.5rem' }}
-                                    variant='outline-primary'
-                                    onClick={detailsToggleHandler}
-                                >
-                                    Close
-                                </Button>
+                                {!editMode ? (
+                                    <Button
+                                        style={{ margin: '0.5rem' }}
+                                        variant='outline-primary'
+                                        onClick={detailsToggleHandler}
+                                    >
+                                        Close
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        style={{ margin: '0.5rem', fontWeight: 700 }}
+                                        variant='outline-success'
+                                        onClick={sendEditHandler}
+                                    >
+                                        Save Edit
+                                    </Button>
+                                )}
                                 <Button style={{ margin: '0.5rem' }} variant='danger' onClick={deleteProductHandler}>
                                     Delete
                                 </Button>

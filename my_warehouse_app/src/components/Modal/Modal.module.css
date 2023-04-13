@@ -32,8 +32,10 @@
     position: absolute;
     border-radius: 7px;
     background: linear-gradient(46deg, rgb(255, 255, 255) 2%, rgb(212, 114, 114) 100%);
+    max-width: 45rem;
 }
 
 img{
     height: 20rem;
+    border-radius: 7px;
 }
