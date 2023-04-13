@@ -7,9 +7,9 @@ import { displayDateHandler } from '../../hooks/displayDateHandler';
 import CustomInput from '../CustomInput/CustomInput';
 import CustomTextarea from '../CustomTextarea/CustomTextarea';
 import SelectInput from '../HazardousSelectInput/SelectInput';
-import useInput from '../../hooks/use-input';
-import isNotEmpty from '../../hooks/isNotEmpty';
 import { url } from '../../constants/url';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 function ProductCard({ id, children, title, image, hazardous, unit, quantity, createdAt, updatedAt, backUpSrc }) {
     const [showDetails, setShowDetails] = useState(false);
@@ -20,14 +20,9 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
     const [qtyValue, setQtyValue] = useState(quantity);
     const [imageValue, setImageValue] = useState(backUpSrc || image || '');
     const [descriptionValue, setDescriptionValue] = useState(children || '');
-    const {
-        value: hazardousInput,
-        // isValid: hazardousInputIsValid,
-        hasError: hazardousInputHasError,
-        valueChangeHandler: hazardousInputHandler,
-        inputBlurHandler: hazardousInputBlurHandler
-        // reset: resetHazardousInput
-    } = useInput(isNotEmpty);
+    const [hazardousInput, setHazardousInput] = useState(hazardous || '')
+   
+    const history = useHistory();
 
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
@@ -37,8 +32,28 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
         setEditMode(!editMode);
     }
 
-    function sendEditHandler() {
-        console.log();
+    async function sendEditHandler() {
+        if (!titleValue || !unitValue || !qtyValue) {
+            return window.alert('You have to fill in all needed imputs!')
+        }
+        const updatedProduct = {
+            name: titleValue,
+            picture: imageValue,
+            quantity: qtyValue,
+            unit: unitValue,
+            description: descriptionValue,
+            hazardous: hazardousInput
+        }
+        console.log(updatedProduct);
+        try {
+            await axios.put(`${url}/products/${id}`, updatedProduct);
+                history.push('/products');
+                setEditMode(false);
+                setShowDetails(false);
+        } catch (error) {
+            console.log(error);
+            window.alert(`There has been an error! ${error}`)
+        }
     }
 
     function deleteProductHandler() {
@@ -97,9 +112,9 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
                                         label={'Hazardous:'}
                                         name={'hazardous'}
                                         value={hazardousInput}
-                                        blurHandler={hazardousInputBlurHandler}
-                                        inputHandler={hazardousInputHandler}
-                                        hasError={hazardousInputHasError}
+                                        // blurHandler={hazardousInputBlurHandler}
+                                        inputHandler={setHazardousInput}
+                                        // hasError={hazardousInputHasError}
                                     />
                                     <CustomInput
                                         label={'Image:'}

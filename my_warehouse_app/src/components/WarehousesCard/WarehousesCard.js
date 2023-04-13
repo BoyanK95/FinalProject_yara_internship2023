@@ -35,8 +35,8 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     }
 
     async function sendEditHandler() {
-        if (!locationValue || !storageValue) {
-            return window.alert('You have to fill in Location and Storage!');
+        if (!locationValue || !storageValue || !titleValue) {
+            return window.alert('You have to fill in all needed imputs!');
         }
         if (
             locationValue !== location ||
