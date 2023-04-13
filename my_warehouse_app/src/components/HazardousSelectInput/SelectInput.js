@@ -9,7 +9,7 @@ const SelectInput = (props) => {
             <select
                 // className={hazardousInputClass}
                 name={props.name}
-                onBlur={props.blurHandler}
+                // onBlur={props.blurHandler}
                 onChange={props.inputHandler}
                 value={props.value}
             >

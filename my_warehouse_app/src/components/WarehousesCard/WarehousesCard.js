@@ -3,6 +3,8 @@ import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
 import { displayDateHandler } from '../../hooks/displayDateHandler';
+import { translateStringToNumber } from '../../hooks/translateStringToNumber';
+import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
 import classes from './Warehouses.module.css';
 import CustomInput from '../CustomInput/CustomInput';
 import CustomTextarea from '../CustomTextarea/CustomTextarea';
@@ -11,6 +13,7 @@ import SelectInput from '../HazardousSelectInput/SelectInput';
 import useInput from '../../hooks/use-input';
 import isNotEmpty from '../../hooks/isNotEmpty';
 import { url } from '../../constants/url';
+import axios from 'axios';
 
 function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, location, storage, createdAt, updatedAt }) {
     const [showDetails, setShowDetails] = useState(false);
@@ -19,16 +22,9 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     const [titleValue, setTitleValue] = useState(title);
     const [locationValue, setLocationValue] = useState(location);
     const [storageValue, setStorageValue] = useState(storage);
-    const [imageValue, setImageValue] = useState(backUpSrc || image || '');
+    const [imageValue, setImageValue] = useState(image || backUpSrc || '');
     const [descriptionValue, setDescriptionValue] = useState(children || '');
-    const {
-        value: hazardousInput,
-        // isValid: hazardousInputIsValid,
-        hasError: hazardousInputHasError,
-        valueChangeHandler: hazardousInputHandler,
-        inputBlurHandler: hazardousInputBlurHandler
-        // reset: resetHazardousInput
-    } = useInput(isNotEmpty);
+    const [hazardousInput, setHazardousInput] = useState(hazardous || '')
 
     const history = useHistory();
 
@@ -40,7 +36,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
         setEditMode(!editMode);
     }
 
-    function sendEditHandler() {
+    async function sendEditHandler() {
         if (!locationValue || !storageValue) {
             return window.alert('You have to fill in Location and Storage!');
         }
@@ -51,10 +47,25 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
             hazardousInput !== hazardous
         ) {
             console.log('Storage edited');
-            console.log(titleValue, locationValue, storageValue, descriptionValue, hazardousInput);
-            history.push('/warehouses');
-            setEditMode(false);
-            setShowDetails(false);
+            console.log(translateStringToBoolean(hazardousInput));
+            const updatedWarehouseData = {
+                name: titleValue,
+                picture: imageValue,
+                location: locationValue,
+                storage: translateStringToNumber(storageValue),
+                hazardous: translateStringToBoolean(hazardousInput),
+                description: descriptionValue
+            };
+            console.log(updatedWarehouseData);
+            try {
+                await axios.put(`${url}/warehouses/${id}`, updatedWarehouseData);
+                history.push('/warehouses');
+                setEditMode(false);
+                setShowDetails(false);
+            } catch (error) {
+                console.log(error);
+                window.alert('There has been an error!' + error)
+            }
         }
     }
 
@@ -71,7 +82,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
-                    setShowDetails(false)
+                    setShowDetails(false);
                     return response.json();
                 })
                 .catch((error) => {
@@ -123,9 +134,8 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                                         label={'Hazardous:'}
                                         name={'hazardous'}
                                         value={hazardousInput}
-                                        blurHandler={hazardousInputBlurHandler}
-                                        inputHandler={hazardousInputHandler}
-                                        hasError={hazardousInputHasError}
+                                        inputHandler={setHazardousInput}
+                                        // hasError={hazardousInputHasError}
                                     />
                                     <CustomInput
                                         label={'Image:'}
