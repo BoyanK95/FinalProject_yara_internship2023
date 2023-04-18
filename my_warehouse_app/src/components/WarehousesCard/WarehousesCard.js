@@ -48,14 +48,14 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
             descriptionValue !== children
         ) {
             console.log('Storage edited');
-            console.log(hazardousInput.target.value);
-            console.log(translateStringToBoolean(hazardousInput.target.value));
+            console.log(hazardousInput);
+            console.log(translateStringToBoolean(hazardousInput));
             const updatedWarehouseData = {
                 name: titleValue,
                 picture: imageValue,
                 location: locationValue,
                 storage: translateStringToNumber(storageValue),
-                hazardous: translateStringToBoolean(hazardousInput.target.value),
+                hazardous: translateStringToBoolean(hazardousInput),
                 description: descriptionValue
             };
             console.log(updatedWarehouseData);
@@ -136,7 +136,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                                         label={'Hazardous:'}
                                         name={'hazardous'}
                                         value={hazardousInput}
-                                        inputHandler={setHazardousInput}
+                                        inputHandler={(e) => setHazardousInput(e.target.value)}
                                         // hasError={hazardousInputHasError}
                                     />
                                     <CustomInput

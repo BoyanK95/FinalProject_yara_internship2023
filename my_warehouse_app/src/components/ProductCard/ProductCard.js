@@ -45,7 +45,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
             quantity: translateStringToNumber(qtyValue),
             unit: translateStringToNumber(unitValue),
             description: descriptionValue,
-            hazardous: translateStringToBoolean(hazardousInput.target.value)
+            hazardous: translateStringToBoolean(hazardousInput)
         }
         console.log(updatedProduct);
         try {
@@ -116,7 +116,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
                                         name={'hazardous'}
                                         value={hazardousInput}
                                         // blurHandler={hazardousInputBlurHandler}
-                                        inputHandler={setHazardousInput}
+                                        inputHandler={(e) => setHazardousInput(e.target.value)}
                                         // hasError={hazardousInputHasError}
                                     />
                                     <CustomInput
