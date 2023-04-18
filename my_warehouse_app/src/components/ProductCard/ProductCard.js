@@ -10,6 +10,8 @@ import SelectInput from '../HazardousSelectInput/SelectInput';
 import { url } from '../../constants/url';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { translateStringToNumber } from '../../hooks/translateStringToNumber';
+import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
 
 function ProductCard({ id, children, title, image, hazardous, unit, quantity, createdAt, updatedAt, backUpSrc }) {
     const [showDetails, setShowDetails] = useState(false);
@@ -20,7 +22,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
     const [qtyValue, setQtyValue] = useState(quantity);
     const [imageValue, setImageValue] = useState(backUpSrc || image || '');
     const [descriptionValue, setDescriptionValue] = useState(children || '');
-    const [hazardousInput, setHazardousInput] = useState(hazardous || '')
+    const [hazardousInput, setHazardousInput] = useState(hazardous)
    
     const history = useHistory();
 
@@ -40,10 +42,10 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
         const updatedProduct = {
             name: titleValue,
             picture: imageValue,
-            quantity: qtyValue,
-            unit: unitValue,
+            quantity: translateStringToNumber(qtyValue),
+            unit: translateStringToNumber(unitValue),
             description: descriptionValue,
-            hazardous: hazardousInput
+            hazardous: translateStringToBoolean(hazardousInput.target.value)
         }
         console.log(updatedProduct);
         try {

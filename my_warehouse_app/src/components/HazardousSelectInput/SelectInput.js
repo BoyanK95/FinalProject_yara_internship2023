@@ -13,7 +13,7 @@ const SelectInput = (props) => {
                 onChange={props.inputHandler}
                 value={props.value}
             >
-                <option value=''>Select</option>
+                {/* <option value=''>Select</option> */}
                 <option value='true'>Yes</option>
                 <option value='false'>No</option>
             </select>

@@ -22,13 +22,13 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     const [storageValue, setStorageValue] = useState(storage);
     const [imageValue, setImageValue] = useState(image || backUpSrc || '');
     const [descriptionValue, setDescriptionValue] = useState(children || '');
-    const [hazardousInput, setHazardousInput] = useState(hazardous || '')
+    const [hazardousInput, setHazardousInput] = useState(hazardous);
 
     const history = useHistory();
 
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
-        setEditMode(false)
+        setEditMode(false);
     }
 
     function editToggleHandler() {
@@ -36,6 +36,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     }
 
     async function sendEditHandler() {
+        debugger;
         if (!locationValue || !storageValue || !titleValue) {
             return window.alert('You have to fill in all needed imputs!');
         }
@@ -47,12 +48,14 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
             descriptionValue !== children
         ) {
             console.log('Storage edited');
+            console.log(hazardousInput.target.value);
+            console.log(translateStringToBoolean(hazardousInput.target.value));
             const updatedWarehouseData = {
                 name: titleValue,
                 picture: imageValue,
                 location: locationValue,
                 storage: translateStringToNumber(storageValue),
-                hazardous: translateStringToBoolean(hazardousInput),
+                hazardous: translateStringToBoolean(hazardousInput.target.value),
                 description: descriptionValue
             };
             console.log(updatedWarehouseData);
@@ -63,7 +66,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
                 setShowDetails(false);
             } catch (error) {
                 console.log(error);
-                window.alert('There has been an error!' + error)
+                window.alert('There has been an error!' + error);
             }
         }
     }
