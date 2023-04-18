@@ -10,7 +10,7 @@ function HomePage() {
 
     const history = useHistory();
 
-    function goToWareHouses() {
+    function goToWarehouses() {
         history.push('/warehouses');
     }
 
@@ -18,7 +18,7 @@ function HomePage() {
         history.push('/products');
     }
 
-    if (!ctx.isLoggedIn) {
+    if (!ctx.token) {
         return <NotAuthHomePage />;
     }
     return (
@@ -42,7 +42,7 @@ function HomePage() {
                 </div>
                 <ul>
                     <li>
-                        Track stock movement in and out of each <span onClick={goToWareHouses}>warehouse,</span>
+                        Track stock movement in and out of each <span onClick={goToWarehouses}>warehouse,</span>
                     </li>
                     <li>
                         Manage <span className='dangerous'>hazardous</span> and non-hazardous products separately,
@@ -51,7 +51,7 @@ function HomePage() {
                         Record <span onClick={goToProducts}>product details</span> such as amount and date,
                     </li>
                     <li>
-                        Monitor <span onClick={goToWareHouses}>warehouse stock levels,</span>
+                        Monitor <span onClick={goToWarehouses}>warehouse stock levels,</span>
                     </li>
                     <li>User-friendly interface for easy inventory management!</li>
                 </ul>

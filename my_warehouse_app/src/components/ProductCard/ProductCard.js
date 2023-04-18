@@ -69,6 +69,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
+                    setShowDetails(false);
                     return response.json();
                 })
                 .catch((error) => {
@@ -84,7 +85,6 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
                 <Card.Title>{title}</Card.Title>
                 {children && <Card.Text>{children}</Card.Text>}
                 {!children && <p>There is no description for this item!</p>}
-                <Card.Text></Card.Text>
                 <Button variant='outline-primary' style={{ fontWeight: '700' }} onClick={detailsToggleHandler}>
                     Details
                 </Button>
@@ -118,7 +118,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
                                     />
                                     <CustomInput
                                         label={'Image:'}
-                                        type={'text'}
+                                        type={'url'}
                                         value={imageValue}
                                         onChange={(e) => setImageValue(e.target.value)}
                                     />

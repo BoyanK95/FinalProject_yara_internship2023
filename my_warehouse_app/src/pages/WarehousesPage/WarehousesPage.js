@@ -17,7 +17,9 @@ import { url } from '../../constants/url';
 function WarehousesPage() {
     const [warehousesAreVisible, setWarehousesAreVisible] = useState(false);
     const [isAddingWarehouse, setIsAddingWarehouse] = useState(false);
+
     const { data, error, isLoading } = useHttp(`${url}/warehouses`, 'GET', null, 2000);
+    
     const history = useHistory();
 
     let warehouseVisibilityBtn = 'Show Warehouses';

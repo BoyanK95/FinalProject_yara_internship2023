@@ -5,11 +5,11 @@ import DarkTable from '../../components/DarkTable/DarkTable'
 import classes from './MovementsPage.module.css';
 
 function MovementsPage() {
-    const { data, error, isLoading } = useHttp(`${url}/movements`, 'GET', null, 1000); //http://localhost:3001/movements
+    const { data, error, isLoading } = useHttp(`${url}/movements`, 'GET', null, 4000); //http://localhost:3001/movements
 
     return (
         <div>
-            <h4 className='title'>These are your movements:</h4>
+            {data?.length > 0 && <h4 className='title'>These are your movements:</h4>}
             <div className={classes.container}>
                 {isLoading && <RotatingSquareLoader />}
                 {!isLoading && error && !data && (
@@ -27,7 +27,7 @@ function MovementsPage() {
                         <DarkTable data={data}/>
                     </>
                 )}
-                {data && data.length === 0 && !isLoading && !error && <h4>There are no movements to display!</h4>}
+                {data && data.length === 0 && !isLoading && !error && <h4 style={{margin: '5rem'}}>There are no movements to display!</h4>}
             </div>
         </div>
     );

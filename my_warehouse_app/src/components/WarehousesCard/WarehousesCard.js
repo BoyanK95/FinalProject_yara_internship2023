@@ -42,7 +42,8 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
             locationValue !== location ||
             storageValue !== storage ||
             titleValue !== title ||
-            hazardousInput !== hazardous
+            hazardousInput !== hazardous ||
+            descriptionValue !== children
         ) {
             console.log('Storage edited');
             const updatedWarehouseData = {
