@@ -28,6 +28,7 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
 
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
+        setEditMode(false)
     }
 
     function editToggleHandler() {

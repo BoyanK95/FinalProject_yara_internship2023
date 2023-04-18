@@ -26,6 +26,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
 
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
+        setEditMode(false)
     }
 
     function editToggleHandler() {
