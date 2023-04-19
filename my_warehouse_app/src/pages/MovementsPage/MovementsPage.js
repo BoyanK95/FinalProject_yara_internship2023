@@ -5,7 +5,7 @@ import DarkTable from '../../components/DarkTable/DarkTable'
 import classes from './MovementsPage.module.css';
 
 function MovementsPage() {
-    const { data, error, isLoading } = useHttp(`${url}/movements`, 'GET', null, 4000); //http://localhost:3001/movements
+    const { data, error, isLoading } = useHttp(`${url}/movements`, 'GET', null, 1000);  
 
     return (
         <div>

@@ -1,0 +1,9 @@
+
+.table th {
+    padding: 2rem;
+    background-color: rgb(97, 97, 97);
+}
+
+.table td {
+    padding: 1.5rem;
+}

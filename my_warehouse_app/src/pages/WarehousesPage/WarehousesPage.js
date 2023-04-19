@@ -6,7 +6,6 @@ import Modal from '../../components/Modal/Modal';
 import Card from 'react-bootstrap/Card';
 import { BlockSpiner } from '../../components/LoadingSpiner/BlocksSpiner';
 import useHttp from '../../hooks/use-http';
-import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
@@ -19,8 +18,6 @@ function WarehousesPage() {
     const [isAddingWarehouse, setIsAddingWarehouse] = useState(false);
 
     const { data, error, isLoading } = useHttp(`${url}/warehouses`, 'GET', null, 2000);
-    
-    const history = useHistory();
 
     let warehouseVisibilityBtn = 'Show Warehouses';
     if (warehousesAreVisible) {
@@ -34,38 +31,24 @@ function WarehousesPage() {
     function showAddWarehouseToggler() {
         setIsAddingWarehouse(!isAddingWarehouse);
     }
-    
-    function addWarehouseHandler(data) {
-        // console.log(data);
-        // console.log({
-        //     name: data.name,
-        //     location: data.secondInput,
-        //     storage: translateStringToNumber(data.numberInput),
-        //     hazardous: translateStringToBoolean(data.hazardousInput),
-        //     description: data.fourthInput,
-        //     picture: data.thirdInput
-        // });
-        axios
-            .post(`${url}/warehouses`, {
+
+    async function addWarehouseHandler(data) {
+        try {
+            await axios.post(`${url}/warehouses`, {
                 name: data.name,
                 location: data.secondInput,
                 storage: translateStringToNumber(data.numberInput),
                 hazardous: translateStringToBoolean(data.hazardousInput),
                 description: data.fourthInput,
                 picture: data.thirdInput
-            })
-            .then((response) => {
-                console.log(response.data);
-                setIsAddingWarehouse(false);
-            })
-            .catch((error) => {
-                console.log(error);
             });
-        history.push('/warehouses');
-        // setIsAddingWarehouse(false);
+            window.location.reload()
+            setIsAddingWarehouse(false);
+        } catch (error) {
+            console.log(error);
+            alert(error)
+        }
     }
-
-    console.log(data);
 
     return (
         <div className='centered'>

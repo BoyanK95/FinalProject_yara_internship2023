@@ -8,7 +8,6 @@ import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
 import classes from './Warehouses.module.css';
 import CustomInput from '../CustomInput/CustomInput';
 import CustomTextarea from '../CustomTextarea/CustomTextarea';
-import { useHistory } from 'react-router-dom';
 import SelectInput from '../HazardousSelectInput/SelectInput';
 import { url } from '../../constants/url';
 import axios from 'axios';
@@ -24,8 +23,6 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     const [descriptionValue, setDescriptionValue] = useState(children || '');
     const [hazardousInput, setHazardousInput] = useState(hazardous);
 
-    const history = useHistory();
-
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
         setEditMode(false);
@@ -36,7 +33,6 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
     }
 
     async function sendEditHandler() {
-        debugger;
         if (!locationValue || !storageValue || !titleValue) {
             return window.alert('You have to fill in all needed imputs!');
         }
@@ -47,9 +43,6 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
             hazardousInput !== hazardous ||
             descriptionValue !== children
         ) {
-            console.log('Storage edited');
-            console.log(hazardousInput);
-            console.log(translateStringToBoolean(hazardousInput));
             const updatedWarehouseData = {
                 name: titleValue,
                 picture: imageValue,
@@ -61,8 +54,8 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
             console.log(updatedWarehouseData);
             try {
                 await axios.put(`${url}/warehouses/${id}`, updatedWarehouseData);
-                history.push('/warehouses');
                 setEditMode(false);
+                window.location.reload();
                 setShowDetails(false);
             } catch (error) {
                 console.log(error);
@@ -71,25 +64,16 @@ function WarehousesCard({ id, children, title, image, backUpSrc, hazardous, loca
         }
     }
 
-    function deleteWarehouseHandler() {
+    async function deleteWarehouseHandler() {
         const confirmDelete = window.confirm(`Are you sure you want to delete the warehouse with title: ${title}?`);
         if (confirmDelete) {
-            return fetch(`${url}/warehouses/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    setShowDetails(false);
-                    return response.json();
-                })
-                .catch((error) => {
-                    console.error('There was a problem with the DELETE request:', error);
-                });
+            try {
+                await axios.delete(`${url}/warehouses/${id}`);
+                setShowDetails(false);
+                window.location.reload();
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 

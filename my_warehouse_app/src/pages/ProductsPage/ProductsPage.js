@@ -6,9 +6,8 @@ import Card from 'react-bootstrap/Card';
 import AddItemForm from '../../components/Form/AddItemForm/AddItemForm';
 import { BlockSpiner } from '../../components/LoadingSpiner/BlocksSpiner';
 import useHttp from '../../hooks/use-http';
-import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import classes from './ProductPage.module.css';
 import { translateStringToNumber } from '../../hooks/translateStringToNumber';
 import { translateStringToBoolean } from '../../hooks/translateStringToBoolean';
@@ -19,7 +18,6 @@ function ProductsPage() {
     const [productsAreVisible, setProductsAreVisible] = useState(false);
     const [isAddingProduct, setIsAddingProduct] = useState(false);
     const { data, error, isLoading } = useHttp(`${url}/products`, 'GET', null, 2000);
-    const history = useHistory();
 
     let btnText = 'Show Products';
     if (productsAreVisible) {
@@ -34,26 +32,21 @@ function ProductsPage() {
         setIsAddingProduct(!isAddingProduct);
     }
 
-    function addProductHandler(data) {
-        console.log(data);
-        axios
-            .post(`${url}/products`, {
+    async function addProductHandler(data) {
+        try {
+            await axios.post(`${url}/products`, {
                 name: data.name,
                 unit: data.secondInput,
                 quantity: translateStringToNumber(data.numberInput),
                 hazardous: translateStringToBoolean(data.hazardousInput),
                 description: data.fourthInput,
                 picture: data.thirdInput
-            })
-            .then((response) => {
-                console.log(response.data);
-                setIsAddingProduct(false);
-            })
-            .catch((error) => {
-                console.log(error);
             });
-        history.push('/products');
-        // setIsAddingProduct(false);
+            window.location.reload()
+            setIsAddingProduct(false)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     console.log(data);

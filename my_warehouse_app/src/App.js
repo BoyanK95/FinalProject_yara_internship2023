@@ -14,7 +14,7 @@ import './App.css';
 import MovementsPage from './pages/MovementsPage/MovementsPage';
 
 function App() {
-    const ctx = useContext(AuthCtx)
+    const ctx = useContext(AuthCtx);
     return (
         <Layout>
             <Switch>
@@ -28,7 +28,7 @@ function App() {
                     <RegistrationPage />
                 </Route>
                 <Route path='/login'>
-                    <LoginPage loginHandler={ctx.onLogin} />
+                    <LoginPage />
                 </Route>
                 <Route path='*'>
                     <NotFound />

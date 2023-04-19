@@ -1,7 +1,14 @@
+import { useContext } from 'react';
 import CustomForm from '../../components/Form/CustomForm';
+import AuthCtx from '../../context/authCtx';
 
-function LoginPage(props) {    
-    
+function LoginPage() {
+    const ctx = useContext(AuthCtx);
+
+    function loginHandler(formData) {
+        ctx.onLogin(formData)
+    }
+
     return (
         <div className='centered'>
             <div>
@@ -9,7 +16,7 @@ function LoginPage(props) {
             </div>
             <div>
                 <CustomForm
-                    onSubmit={props.loginHandler}
+                    onSubmit={loginHandler}
                     firstLabel='E-mail@'
                     secondLabel='Username'
                     thirdLabel='Password:'

@@ -22,13 +22,13 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
     const [qtyValue, setQtyValue] = useState(quantity);
     const [imageValue, setImageValue] = useState(backUpSrc || image || '');
     const [descriptionValue, setDescriptionValue] = useState(children || '');
-    const [hazardousInput, setHazardousInput] = useState(hazardous)
-   
+    const [hazardousInput, setHazardousInput] = useState(hazardous);
+
     const history = useHistory();
 
     function detailsToggleHandler() {
         setShowDetails(!showDetails);
-        setEditMode(false)
+        setEditMode(false);
     }
 
     function editToggleHandler() {
@@ -37,7 +37,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
 
     async function sendEditHandler() {
         if (!titleValue || !unitValue || !qtyValue) {
-            return window.alert('You have to fill in all needed imputs!')
+            return window.alert('You have to fill in all needed imputs!');
         }
         const updatedProduct = {
             name: titleValue,
@@ -46,38 +46,26 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
             unit: translateStringToNumber(unitValue),
             description: descriptionValue,
             hazardous: translateStringToBoolean(hazardousInput)
-        }
-        console.log(updatedProduct);
+        };
         try {
             await axios.put(`${url}/products/${id}`, updatedProduct);
-                history.push('/products');
-                setEditMode(false);
-                setShowDetails(false);
+            history.push('/products');
+            setEditMode(false);
+            setShowDetails(false);
         } catch (error) {
             console.log(error);
-            window.alert(`There has been an error! ${error}`)
+            window.alert(`There has been an error! ${error}`);
         }
     }
 
-    function deleteProductHandler() {
+    async function deleteProductHandler() {
         const confirmDelete = window.confirm(`Are you sure you want to delete the product with title: ${title}?`);
         if (confirmDelete) {
-            return fetch(`${url}/products/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    setShowDetails(false);
-                    return response.json();
-                })
-                .catch((error) => {
-                    console.error('There was a problem with the DELETE request:', error);
-                });
+            try {
+                await axios.delete(`${url}/products/${id}`);
+                setShowDetails(false);
+                window.location.reload();
+            } catch (error) {}
         }
     }
 
@@ -115,9 +103,7 @@ function ProductCard({ id, children, title, image, hazardous, unit, quantity, cr
                                         label={'Hazardous:'}
                                         name={'hazardous'}
                                         value={hazardousInput}
-                                        // blurHandler={hazardousInputBlurHandler}
                                         inputHandler={(e) => setHazardousInput(e.target.value)}
-                                        // hasError={hazardousInputHasError}
                                     />
                                     <CustomInput
                                         label={'Image:'}

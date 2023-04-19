@@ -64,7 +64,6 @@ const AddItemForm = (props) => {
     } = useInput(isNotEmpty);
 
     let formIsValid = false;
-    // console.log(formIsValid);
 
     if (nameInputIsValid && secondInputIsValid && numberInputIsValid && hazardousInputIsValid) {
         formIsValid = true;
@@ -72,16 +71,9 @@ const AddItemForm = (props) => {
 
     function formSubmitHandler(e) {
         e.preventDefault();
-        // console.log(formIsValid);
         if (!formIsValid) {
             return;
         }
-        console.log('SIBMITED');
-        // console.log(name);
-        // console.log(secondInput);
-        // console.log(thirdInput);
-        // console.log(fourthInput);
-        // console.log(numberInput);
 
         props.onSubmit({
             name,
@@ -111,7 +103,6 @@ const AddItemForm = (props) => {
     const thirdhInputClass = !thirdInputHasError ? classes.input : classes.error;
     const fourthInputClass = !fourthInputHasError ? classes.input : classes.error;
     const numberInputClass = !numberInputHasError ? classes.input : classes.error;
-    // const hazardousInputClass = !hazardousInputHasError ? classes.input : classes.error;
 
     return (
         <>
@@ -207,23 +198,6 @@ const AddItemForm = (props) => {
                         inputHandler={hazardousInputHandler}
                         hasError={hazardousInputHasError}
                     />
-                    // <div className={classes.container}>
-                    //     <label htmlFor='hazardous'>{props.hazardousLabel}</label>
-                    //     <select
-                    //         // className={hazardousInputClass}
-                    //         name='hazardous'
-                    //         onBlur={hazardousInputBlurHandler}
-                    //         onChange={hazardousInputHandler}
-                    //         value={hazardousInput}
-                    //     >
-                    //         <option value=''>Select</option>
-                    //         <option value='true'>Yes</option>
-                    //         <option value='false'>No</option>
-                    //     </select>
-                    //     {hazardousInputHasError && (
-                    //         <p className={classes.errorText}>Value of {props.hazardousLabel} is required!</p>
-                    //     )}
-                    // </div>
                 )}
 
                 <div className={classes.btnContainer}>
