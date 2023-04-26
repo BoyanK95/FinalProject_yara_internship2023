@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { url } from '../constants/url';
 
 const AuthCtx = React.createContext({
     isLoggedIn: false,
@@ -25,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
 
     async function loginHandler(formData) {
         try {
-            const response = await axios.post('http://localhost:3001/auth/signup', {
+            const response = await axios.post(`${url}/auth/signup`, {
                 email: formData.firstInput,
                 name: formData.secondInput,
                 password: formData.thirdInput

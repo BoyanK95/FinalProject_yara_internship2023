@@ -10,14 +10,14 @@ const Layout = ({ children, onLogout }) => {
     const ctx = useContext(AuthCtx)
 
     function toggleSideBarVisibleHandler() {
-        if (ctx.isLoggedIn) {
+        if (ctx.token) {
             setSideBarIsVisible(!sideBarIsVisible);
         } else {
             setSideBarIsVisible(false)
         }
     }
     function showSideBarVisibleHandler() {
-        if (ctx.isLoggedIn) {
+        if (ctx.token) {
             setSideBarIsVisible(true);
         }
     }

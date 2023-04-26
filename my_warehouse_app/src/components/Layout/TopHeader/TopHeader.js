@@ -7,7 +7,6 @@ import classes from './TopHeader.module.css';
 
 const TopHeader = (props) => {
     const ctx = useContext(AuthCtx);
-    console.log(ctx);
 
     const history = useHistory();
 
