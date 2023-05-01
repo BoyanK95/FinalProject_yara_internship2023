@@ -12,21 +12,29 @@ You can start the app using npm start command. Normally react apps run on port 3
 
 
 
-Screens:
+# Screens:
 
-Screen 1: Login and Registration
+# Screen 1 Home page
+
+You see a different home page depending on Auth.token. For not registered users you have links to registration, for registered - links to producst, movements, and warehouses.
+
+## Screen 2: Login and Registration
+
 On this screen, users can register and log in to their "space" and "data."
 
-Screen 2: Warehouse Operations
+## Screen 3: Warehouse Operations
+
 On this screen, users can perform different warehouse operations like delete, create, or edit. They can also list all the warehouses for the specific user.
 
-Screen 3: Product Operations
+## Screen 4: Product Operations
+
 On this screen, users can quickly add, edit and delete products to the master products list and see a full list of the product list.
 
-Screen 4: Warehouse Stock Movement
+## Screen 4: Warehouse Stock Movement
+
  The page shows the current movements , free stock space remaining, and a historic list of Imports and exports. The user can also add a new import or export.
 
-Database Schema
+## Database Schema
 The database schema includes the following tables:
 
 users
