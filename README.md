@@ -14,7 +14,7 @@ You can start the app using npm start command. Normally react apps run on port 3
 
 # Screens:
 
-# Screen 1 Home page
+## Screen 1 Home page
 
 You see a different home page depending on Auth.token. For not registered users you have links to registration, for registered - links to producst, movements, and warehouses.
 
